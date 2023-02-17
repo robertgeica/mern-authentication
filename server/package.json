@@ -1,0 +1,19 @@
+{
+  "name": "mern-authentication-server",
+  "version": "1.0.0",
+  "description": "Server for MERN authentication using Typescript",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertgeica/mern-authentication.git"
+  },
+  "author": "robertgeica",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robertgeica/mern-authentication/issues"
+  },
+  "homepage": "https://github.com/robertgeica/mern-authentication#readme"
+}
