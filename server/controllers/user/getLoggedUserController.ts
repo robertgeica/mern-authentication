@@ -9,7 +9,7 @@ interface IRequest extends Request {
 }
 
 // @route         GET /api/v1/users/logged-user
-// @description   Get user
+// @description   Get logged in user
 // @access        Private
 export const getLoggedUser = asyncHandler(
   async (req: IRequest, res: Response, next: Function): Promise<void> => {
