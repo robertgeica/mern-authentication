@@ -51,8 +51,10 @@ export const createUser = asyncHandler(
         user: user,
         isEmailSent: isEmailSent,
       });
-    } else {
-      return next(new ErrorResponse('Invalid data.', 400));
+
+      return;
     }
+    
+    return next(new ErrorResponse('Invalid data.', 400));
   }
 );
