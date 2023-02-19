@@ -11,21 +11,21 @@ const userSchema: Schema = new Schema<IUser>(
     schema_version: { type: String, required: true, default: '1.0.0' },
     name: {
       type: String,
-      required: [true, 'Please fill your full name.'],
-      minLength: [5, 'Your name cannot contain less than 5 characters.'],
+      required: [true, 'Full name must be provided.'],
+      minLength: [5, 'Name cannot contain less than 5 characters.'],
     },
     email: {
       type: String,
-      required: true,
+      required: [true, 'Email adress must be provided.'],
       unique: true,
-      validate: [isEmail, 'Please fill a valid email address.'],
+      validate: [isEmail, 'Email adress must be valid.'],
     },
     password: {
       type: String,
-      required: true,
+      required: [true, 'Password must be provided.'],
       validate: [
         isValidPassword,
-        'Your password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character.',
+        'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character.',
       ],
     },
     role: {
@@ -57,7 +57,6 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-
 userSchema.methods.generateEmailConfirmationToken = function () {
   const emailConfirmationToken = crypto.randomBytes(20).toString('hex');
 
@@ -70,6 +69,5 @@ userSchema.methods.generateEmailConfirmationToken = function () {
 
   return emailConfirmationToken;
 };
-
 
 export default model<IUser>('User', userSchema);
