@@ -6,4 +6,4 @@ const asyncHandler = (fn: Function) => {
   };
 };
 
-export { asyncHandler }
+export default asyncHandler;
