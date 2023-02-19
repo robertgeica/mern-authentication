@@ -1,9 +1,10 @@
 import { model, Schema } from 'mongoose';
+import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
 import { IUser } from '../types/User';
 import { isEmail } from '../utils/validateEmail';
 import { isValidPassword } from '../utils/validatePassword';
-import bcrypt from 'bcryptjs';
-import crypto from 'crypto';
 import { HOURS_24 } from '../constants';
 
 const userSchema: Schema = new Schema<IUser>(
@@ -68,6 +69,12 @@ userSchema.methods.generateEmailConfirmationToken = function () {
   this.emailConfirmationExpire = Date.now() + HOURS_24;
 
   return emailConfirmationToken;
+};
+
+userSchema.methods.getSignedJwtToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET as string, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
 };
 
 export default model<IUser>('User', userSchema);

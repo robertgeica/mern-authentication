@@ -1,1 +1,2 @@
-export { createUser} from './createUserController';
+export { createUser } from './createUserController';
+export { confirmEmail } from './confirmEmailController';
