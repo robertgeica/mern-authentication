@@ -1,5 +1,4 @@
-import { Response } from 'express';
-import { Request } from 'express';
+import { Response, Request } from 'express';
 import asyncHandler from '../../middleware/asyncHandler';
 import User from '../../models/User';
 import sendEmail from '../../modules/emailSender';
