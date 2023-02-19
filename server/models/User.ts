@@ -2,6 +2,9 @@ import { model, Schema } from 'mongoose';
 import { IUser } from '../types/User';
 import { isEmail } from '../utils/validateEmail';
 import { isValidPassword } from '../utils/validatePassword';
+import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
+import { HOURS_24 } from '../constants';
 
 const userSchema: Schema = new Schema<IUser>(
   {
@@ -44,5 +47,29 @@ const userSchema: Schema = new Schema<IUser>(
   },
   { timestamps: true }
 );
+
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+
+userSchema.methods.generateEmailConfirmationToken = function () {
+  const emailConfirmationToken = crypto.randomBytes(20).toString('hex');
+
+  this.emailConfirmationToken = crypto
+    .createHash('sha256')
+    .update(emailConfirmationToken)
+    .digest('hex');
+
+  this.emailConfirmationExpire = Date.now() + HOURS_24;
+
+  return emailConfirmationToken;
+};
+
 
 export default model<IUser>('User', userSchema);
