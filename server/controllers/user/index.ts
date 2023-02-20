@@ -7,3 +7,4 @@ export { getUser } from './getUserController';
 export { deleteUser } from './deleteUserController';
 export { updateUser } from './updateUserController';
 export { sendResetPasswordController} from './sendResetPasswordController';
+export { resetPassword } from './resetPasswordController';
