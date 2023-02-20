@@ -24,7 +24,9 @@ const protect = asyncHandler(
           process.env.JWT_SECRET as string
         ) as JwtPayload;
 
-        req.user = await User.findById(decoded.id).select('-password');
+        req.user = await User.findById(decoded.id).select(
+          '-password -twoFactorAuthCode -emailConfirmationToken -resetPasswordToken'
+        );
 
         next();
       } catch (error) {
