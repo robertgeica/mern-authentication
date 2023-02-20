@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import fileUpload from 'express-fileupload';
 
 import {
   createUser,
@@ -11,6 +12,7 @@ import {
   updateUser,
   sendResetPasswordController,
   resetPassword,
+  uploadUserImage,
 } from '../controllers/user';
 import protect from '../middleware/authMiddleware';
 
@@ -30,5 +32,9 @@ router.route('/api/v1/users/confirm-email/:token').put(confirmEmail);
 router.route('/api/v1/users/confirm-email').post(sendEmailConfirmation);
 router.route('/api/v1/users/reset-password').post(sendResetPasswordController);
 router.route('/api/v1/users/reset-password/:token').put(resetPassword);
+router
+  .route('/api/v1/users/image-upload')
+  .patch(protect, fileUpload({ createParentPath: true }), uploadUserImage);
 
+  
 export default router;
