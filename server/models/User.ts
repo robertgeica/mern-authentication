@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import { IUser } from '../types/User';
 import { isEmail } from '../utils/validateEmail';
 import { isValidPassword } from '../utils/validatePassword';
-import { HOURS_24 } from '../constants';
+import { HOURS_12, HOURS_24 } from '../constants';
 
 const userSchema: Schema = new Schema<IUser>(
   {
@@ -79,6 +79,19 @@ userSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET as string, {
     expiresIn: process.env.JWT_EXPIRE,
   });
+};
+
+userSchema.methods.generateResetPasswordToken = function () {
+  const resetToken = crypto.randomBytes(20).toString('hex');
+
+  this.resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  this.resetPasswordExpire = Date.now() + HOURS_12;
+
+  return resetToken;
 };
 
 export default model<IUser>('User', userSchema);
