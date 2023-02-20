@@ -1,1 +1,3 @@
 export const RETRY_DATABASE_CONNECTION_TIMEOUT = 10000;
+export const HOURS_24 = 86400000;
+export const HOURS_12 = 43200000;

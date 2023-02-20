@@ -6,3 +6,4 @@ export { getLoggedUser } from './getLoggedUserController';
 export { getUser } from './getUserController';
 export { deleteUser } from './deleteUserController';
 export { updateUser } from './updateUserController';
+export { sendResetPasswordController} from './sendResetPasswordController';

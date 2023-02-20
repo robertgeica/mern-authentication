@@ -9,6 +9,7 @@ import {
   getUser,
   deleteUser,
   updateUser,
+  sendResetPasswordController,
 } from '../controllers/user';
 import protect from '../middleware/authMiddleware';
 
@@ -26,5 +27,6 @@ router
 
 router.route('/api/v1/users/confirm-email/:token').put(confirmEmail);
 router.route('/api/v1/users/confirm-email').post(sendEmailConfirmation);
+router.route('/api/v1/users/reset-password').post(sendResetPasswordController);
 
 export default router;
