@@ -15,6 +15,12 @@ import {
   uploadUserImage,
 } from '../controllers/user';
 import protect from '../middleware/authMiddleware';
+import {
+  allowMultiple,
+  fileExtensionLimiter,
+  filesExists,
+  fileSizeLimiter,
+} from '../middleware/imageUpload';
 
 const router: Router = Router();
 
@@ -34,7 +40,14 @@ router.route('/api/v1/users/reset-password').post(sendResetPasswordController);
 router.route('/api/v1/users/reset-password/:token').put(resetPassword);
 router
   .route('/api/v1/users/image-upload')
-  .patch(protect, fileUpload({ createParentPath: true }), uploadUserImage);
+  .patch(
+    protect,
+    fileUpload({ createParentPath: true }),
+    filesExists,
+    fileSizeLimiter,
+    fileExtensionLimiter(['.jpg', '.jpeg', '.png']),
+    allowMultiple(false),
+    uploadUserImage
+  );
 
-  
 export default router;

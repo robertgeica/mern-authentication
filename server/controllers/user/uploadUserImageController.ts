@@ -23,10 +23,6 @@ export const uploadUserImage = asyncHandler(
       );
     }
 
-    if (!req.files) {
-      return next(new ErrorResponse(`You must select an image.`, 400));
-    }
-
     if (!req.body.usage) {
       return next(new ErrorResponse(`You must specify image usage.`, 400));
     }
