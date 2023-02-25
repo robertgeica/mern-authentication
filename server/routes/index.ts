@@ -13,6 +13,7 @@ import {
   sendResetPasswordController,
   resetPassword,
   uploadUserImage,
+  requestEmailChange,
 } from '../controllers/user';
 import protect from '../middleware/authMiddleware';
 import {
@@ -49,5 +50,10 @@ router
     allowMultiple(false),
     uploadUserImage
   );
+
+router.route('/api/v1/users/change-email').post(protect, requestEmailChange);
+
+
+
 
 export default router;

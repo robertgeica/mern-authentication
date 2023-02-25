@@ -3,7 +3,6 @@ import asyncHandler from '../../middleware/asyncHandler';
 import User from '../../models/User';
 import { IUser } from '../../types/User';
 import ErrorResponse from '../../utils/errorResponse';
-import generateAuthToken from '../../utils/generateAuthToken';
 
 // @route         POST /api/v1/users/login
 // @description   Login user
@@ -24,7 +23,7 @@ export const loginUser = asyncHandler(
       res.json({
         success: true,
         message: 'User logged in successfully.',
-        authToken: generateAuthToken(user._id),
+        authToken: user.getSignedJwtToken(),
       });
 
       return;
