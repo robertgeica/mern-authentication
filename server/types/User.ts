@@ -17,4 +17,12 @@ export interface IUser extends Document {
   emailConfirmationExpire?: Date;
   resetPasswordToken?: string;
   resetPasswordExpire?: Date;
+
+  newEmail?: string;
+  changeEmailStepOneToken?: string;
+  changeEmailStepOneExpire?: Date;
+  isEmailChangeStepOneConfirmed: boolean;
+  changeEmailStepTwoToken?: string;
+  changeEmailStepTwoExpire?: Date;
+  isEmailChangeStepTwoConfirmed: boolean;
 }

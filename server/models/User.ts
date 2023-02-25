@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { IUser } from '../types/User';
-import { isEmail } from '../utils/validateEmail';
+import { isValidEmail } from '../utils/validateEmail';
 import { isValidPassword } from '../utils/validatePassword';
 import { HOURS_12, HOURS_24 } from '../constants';
 
@@ -19,7 +19,7 @@ const userSchema: Schema = new Schema<IUser>(
       type: String,
       required: [true, 'Email adress must be provided.'],
       unique: true,
-      validate: [isEmail, 'Email adress must be valid.'],
+      validate: [isValidEmail, 'Email adress must be valid.'],
     },
     password: {
       type: String,
@@ -45,6 +45,18 @@ const userSchema: Schema = new Schema<IUser>(
     emailConfirmationExpire: { type: Date },
     resetPasswordToken: { type: String },
     resetPasswordExpire: { type: Date },
+
+    newEmail: {
+      type: String,
+      unique: true,
+      validate: [isValidEmail, 'Email adress must be valid.'],
+    },
+    changeEmailStepOneToken: { type: String },
+    changeEmailStepOneExpire: { type: Date },
+    isEmailChangeStepOneConfirmed: { type: Boolean },
+    changeEmailStepTwoToken: { type: String },
+    changeEmailStepTwoExpire: { type: Date },
+    isEmailChangeStepTwoConfirmed: { type: Boolean },
   },
   { timestamps: true }
 );
@@ -92,6 +104,19 @@ userSchema.methods.generateResetPasswordToken = function () {
   this.resetPasswordExpire = Date.now() + HOURS_12;
 
   return resetToken;
+};
+
+userSchema.methods.generateEmailChangeToken = function (
+  tokenKey: string,
+  tokenExpire: string
+) {
+  const token = crypto.randomBytes(20).toString('hex');
+
+  this[tokenKey] = crypto.createHash('sha256').update(token).digest('hex');
+
+  this[tokenExpire] = Date.now() + HOURS_12;
+
+  return token;
 };
 
 export default model<IUser>('User', userSchema);
