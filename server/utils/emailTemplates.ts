@@ -14,6 +14,11 @@ const resetPasswordEmail = (resetUrl: string): string => {
 `;
 };
 
+const confirmEmailChange = (emailChangeUrl: string): string => {
+  return `
+  <h1>Email change</h1>
+  <p>Access the following link to confirm your email change:</p>
+  <a href=${emailChangeUrl} clicktracking=off>${emailChangeUrl}</a>`;
+};
 
-
-export { confirmAccountEmail, resetPasswordEmail };
+export { confirmAccountEmail, resetPasswordEmail, confirmEmailChange };
