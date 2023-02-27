@@ -29,6 +29,6 @@ export const uploadUserImage = asyncHandler(
 
     const file = req.files.files;
 
-    await imageUpload(file, user._id, req.body.usage, 'users', User, next, res);
+    await imageUpload(file, user._id, req.body.usage, 'users', User, res, next);
   }
 );

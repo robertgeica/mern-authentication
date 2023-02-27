@@ -36,7 +36,11 @@ const userSchema: Schema = new Schema<IUser>(
       default: 'user',
     },
     phoneNumber: { type: Number },
-    avatarUrl: { type: String },
+    avatar: {
+      url: { type: String },
+      mimeType: { type: String },
+      size: { type: Number },
+    },
     twoFactorAuthEnabled: { type: Boolean, required: true, default: false },
     twoFactorAuthCode: { type: String, length: 6 },
 
