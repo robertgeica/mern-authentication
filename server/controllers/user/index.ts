@@ -9,4 +9,5 @@ export { updateUser } from './updateUserController';
 export { sendResetPasswordController} from './sendResetPasswordController';
 export { resetPassword } from './resetPasswordController';
 export { uploadUserImage } from './uploadUserImageController';
-export { requestEmailChange } from './requestEmailChangeController';
+export { requestEmailChange } from './changeEmail/requestEmailChangeController';
+export { confirmEmailChange } from './changeEmail/confirmEmailChangeController';

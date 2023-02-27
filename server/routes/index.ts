@@ -14,6 +14,7 @@ import {
   resetPassword,
   uploadUserImage,
   requestEmailChange,
+  confirmEmailChange,
 } from '../controllers/user';
 import protect from '../middleware/authMiddleware';
 import {
@@ -51,7 +52,8 @@ router
     uploadUserImage
   );
 
-router.route('/api/v1/users/change-email').post(protect, requestEmailChange);
+  router.route('/api/v1/users/change-email').post(protect, requestEmailChange);
+  router.route('/api/v1/users/change-email/:token').post(confirmEmailChange);
 
 
 

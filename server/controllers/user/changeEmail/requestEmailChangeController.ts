@@ -1,10 +1,11 @@
-import { isValidEmail } from './../../utils/validateEmail';
-import { Response, Request } from 'express';
-import asyncHandler from '../../middleware/asyncHandler';
-import User from '../../models/User';
-import sendEmail from '../../modules/emailSender';
-import { confirmEmailChange } from '../../utils/emailTemplates';
-import ErrorResponse from '../../utils/errorResponse';
+import { Response } from 'express';
+import asyncHandler from '../../../middleware/asyncHandler';
+import User from '../../../models/User';
+import sendEmail from '../../../modules/emailSender';
+import { isValidEmail } from '../../../utils/validateEmail';
+import { confirmChangeEmail } from '../../../utils/emailTemplates';
+import ErrorResponse from '../../../utils/errorResponse';
+import { changeEmailUrl } from '../../../utils/changeEmailUrl';
 
 // @route         POST /api/v1/users/change-email
 // @description   Send link to confirm email change
@@ -16,8 +17,8 @@ export const requestEmailChange = asyncHandler(
       return next(new ErrorResponse('Email is not valid.', 400));
     }
 
-    const emailExists = await User.findOne({ email: req.body.newEmail });
-    if (emailExists) {
+    const isEmailUsed = await User.findOne({ email: req.body.newEmail });
+    if (isEmailUsed) {
       return next(new ErrorResponse('Email is already used.', 400));
     }
 
@@ -27,9 +28,7 @@ export const requestEmailChange = asyncHandler(
     }
 
     user.newEmail = req.body.newEmail;
-    await user.save();
-
-    const emailChangeConfirmationToken = user.generateEmailChangeToken(
+     const emailChangeConfirmationToken = user.generateEmailChangeToken(
       'changeEmailStepOneToken',
       'changeEmailStepOneExpire'
     );
@@ -37,15 +36,14 @@ export const requestEmailChange = asyncHandler(
     await user.save();
 
     try {
-      const emailChangeUrl =
-        process.env.NODE_ENV === 'dev'
-          ? `${process.env.BASE_URL}:${process.env.PORT}/change-email/${emailChangeConfirmationToken}`
-          : `${process.env.BASE_URL}/change-email/${emailChangeConfirmationToken}`;
+      const confirmChangeEmailUrl = changeEmailUrl(
+        emailChangeConfirmationToken
+      );
 
       await sendEmail({
         to: user.email,
         subject: 'Confirm your email change 1/2',
-        html: confirmEmailChange(emailChangeUrl),
+        html: confirmChangeEmail(confirmChangeEmailUrl),
       });
 
       res.status(200).json({
@@ -59,7 +57,7 @@ export const requestEmailChange = asyncHandler(
 
       await user.save();
 
-      return next(new ErrorResponse('Email could not be sent', 500));
+      return next(new ErrorResponse('Email could not be sent.', 500));
     }
   }
 );
