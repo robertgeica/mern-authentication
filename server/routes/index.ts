@@ -10,8 +10,8 @@ import {
   getUser,
   deleteUser,
   updateUser,
-  sendResetPasswordController,
-  resetPassword,
+  requestPasswordReset,
+  confirmPasswordReset,
   uploadUserImage,
   requestEmailChange,
   confirmEmailChange,
@@ -38,8 +38,8 @@ router
 
 router.route('/api/v1/users/confirm-email/:token').put(confirmEmail);
 router.route('/api/v1/users/confirm-email').post(sendEmailConfirmation);
-router.route('/api/v1/users/reset-password').post(sendResetPasswordController);
-router.route('/api/v1/users/reset-password/:token').put(resetPassword);
+router.route('/api/v1/users/reset-password').post(requestPasswordReset);
+router.route('/api/v1/users/reset-password/:token').put(confirmPasswordReset);
 router
   .route('/api/v1/users/image-upload')
   .patch(

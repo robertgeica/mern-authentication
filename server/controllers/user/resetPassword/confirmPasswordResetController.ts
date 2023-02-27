@@ -1,14 +1,14 @@
 import { Response, Request } from 'express';
 import crypto from 'crypto';
-import User from '../../models/User';
-import { IUser } from '../../types/User';
-import asyncHandler from '../../middleware/asyncHandler';
-import ErrorResponse from '../../utils/errorResponse';
+import User from '../../../models/User';
+import { IUser } from '../../../types/User';
+import asyncHandler from '../../../middleware/asyncHandler';
+import ErrorResponse from '../../../utils/errorResponse';
 
 // @route         PUT /api/v1/users/reset-password/:token
 // @description   Reset account password
 // @access        Public
-export const resetPassword = asyncHandler(
+export const confirmPasswordReset = asyncHandler(
   async (req: Request, res: Response, next: Function): Promise<void> => {
     const resetPasswordToken = crypto
       .createHash('sha256')
