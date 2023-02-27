@@ -4,7 +4,7 @@ import fileUpload from 'express-fileupload';
 import {
   createUser,
   confirmEmail,
-  sendEmailConfirmation,
+  requestEmailConfirmation,
   loginUser,
   getLoggedUser,
   getUser,
@@ -36,8 +36,8 @@ router
   .delete(protect, deleteUser)
   .patch(protect, updateUser);
 
+  router.route('/api/v1/users/confirm-email').post(requestEmailConfirmation);
 router.route('/api/v1/users/confirm-email/:token').put(confirmEmail);
-router.route('/api/v1/users/confirm-email').post(sendEmailConfirmation);
 router.route('/api/v1/users/reset-password').post(requestPasswordReset);
 router.route('/api/v1/users/reset-password/:token').put(confirmPasswordReset);
 router

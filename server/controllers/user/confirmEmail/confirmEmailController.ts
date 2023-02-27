@@ -1,8 +1,8 @@
 import { Response, Request } from 'express';
 import crypto from 'crypto';
-import User from '../../models/User';
-import ErrorResponse from '../../utils/errorResponse';
-import asyncHandler from '../../middleware/asyncHandler';
+import User from '../../../models/User';
+import ErrorResponse from '../../../utils/errorResponse';
+import asyncHandler from '../../../middleware/asyncHandler';
 
 // @route         PUT /api/v1/users/confirm-email/:token
 // @description   Confirm user email

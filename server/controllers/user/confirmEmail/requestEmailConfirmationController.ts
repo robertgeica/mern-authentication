@@ -1,15 +1,15 @@
 import { Response, Request } from 'express';
-import asyncHandler from '../../middleware/asyncHandler';
-import User from '../../models/User';
-import sendEmail from '../../modules/emailSender';
-import { IUser } from '../../types/User';
-import { confirmAccountEmail } from '../../utils/emailTemplates';
-import ErrorResponse from '../../utils/errorResponse';
+import asyncHandler from '../../../middleware/asyncHandler';
+import User from '../../../models/User';
+import sendEmail from '../../../modules/emailSender';
+import { IUser } from '../../../types/User';
+import { confirmAccountEmail } from '../../../utils/emailTemplates';
+import ErrorResponse from '../../../utils/errorResponse';
 
 // @route         POST /api/v1/users/confirm-email
 // @description   Send link to confirm email
 // @access        Public
-export const sendEmailConfirmation = asyncHandler(
+export const requestEmailConfirmation = asyncHandler(
   async (req: Request, res: Response, next: Function): Promise<void> => {
     const { email } = req.body as Pick<IUser, 'email'>;
     const user: any = await User.findOne({ email }).select('-password');

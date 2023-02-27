@@ -1,6 +1,6 @@
 export { createUser } from './createUserController';
-export { sendEmailConfirmation } from './sendEmailConfirmationController';
-export { confirmEmail } from './confirmEmailController';
+export { requestEmailConfirmation } from './confirmEmail/requestEmailConfirmationController';
+export { confirmEmail } from './confirmEmail/confirmEmailController';
 export { loginUser } from './/loginUserController';
 export { getLoggedUser } from './getLoggedUserController';
 export { getUser } from './getUserController';
