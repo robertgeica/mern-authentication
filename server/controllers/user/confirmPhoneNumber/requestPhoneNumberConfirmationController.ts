@@ -3,6 +3,7 @@ import asyncHandler from '../../../middleware/asyncHandler';
 import User from '../../../models/User';
 import sendSms from '../../../modules/smsSender';
 import ErrorResponse from '../../../utils/errorResponse';
+import { confirmPhoneNumberSms } from '../../../utils/smsTemplates';
 import { isValidPhoneNumber } from '../../../utils/validatePhoneNumber';
 
 // @route         POST /api/v1/users/confirm-phone
@@ -43,7 +44,7 @@ export const requestPhoneNumberConfirmation = asyncHandler(
 
       await user.save();
 
-      const message = `This is your token: ${phoneNumberConfirmationToken}`;
+      const message = confirmPhoneNumberSms(phoneNumberConfirmationToken);
       await sendSms(phoneNumber, message);
 
       res.status(200).json({

@@ -1,4 +1,5 @@
 import { Response, Request } from 'express';
+import { EMAIL_SUBJECT_RESET_PASSWORD } from '../../../constants';
 import asyncHandler from '../../../middleware/asyncHandler';
 import User from '../../../models/User';
 import sendEmail from '../../../modules/emailSender';
@@ -24,10 +25,10 @@ export const requestPasswordReset = asyncHandler(
       await user.save();
 
       const resetPasswordUrl = generateEmailUrl(resetToken, 'password-reset');
-   
+
       await sendEmail({
         to: user.email,
-        subject: 'Reset your password',
+        subject: EMAIL_SUBJECT_RESET_PASSWORD,
         html: resetPasswordEmail(resetPasswordUrl),
       });
 

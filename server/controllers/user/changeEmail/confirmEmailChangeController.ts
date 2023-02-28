@@ -6,6 +6,7 @@ import asyncHandler from '../../../middleware/asyncHandler';
 import sendEmail from '../../../modules/emailSender';
 import { confirmChangeEmail, confirmEmailChanged } from '../../../utils/emailTemplates';
 import { generateEmailUrl } from '../../../utils/generateEmailUrl';
+import { EMAIL_SUBJECT_CONFIRMED_EMAIL_CHANGE, EMAIL_SUBJECT_CONFIRM_EMAIL_CHANGE_2 } from '../../../constants';
 
 // @route         PUT /api/v1/users/change-email/:token
 // @description   Confirm email change
@@ -51,7 +52,7 @@ export const confirmEmailChange = asyncHandler(
 
         await sendEmail({
           to: user.newEmail,
-          subject: 'Confirm your email change 2/2',
+          subject: EMAIL_SUBJECT_CONFIRM_EMAIL_CHANGE_2,
           html: confirmChangeEmail(confirmChangeEmailUrl),
         });
 
@@ -82,7 +83,7 @@ export const confirmEmailChange = asyncHandler(
       try {
         await sendEmail({
           to: oldEmail,
-          subject: 'Email change confirmed',
+          subject: EMAIL_SUBJECT_CONFIRMED_EMAIL_CHANGE,
           html: confirmEmailChanged(),
         });
 

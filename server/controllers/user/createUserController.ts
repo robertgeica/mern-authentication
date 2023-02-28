@@ -5,6 +5,8 @@ import { IUser } from '../../types/User';
 import sendEmail from '../../modules/emailSender';
 import { confirmAccountEmail } from '../../utils/emailTemplates';
 import ErrorResponse from '../../utils/errorResponse';
+import { generateEmailUrl } from '../../utils/generateEmailUrl';
+import { EMAIL_SUBJECT_CONFIRM_EMAIL } from '../../constants';
 
 // @route         POST /api/v1/user
 // @description   Register user
@@ -33,14 +35,14 @@ export const createUser = asyncHandler(
     const emailConfirmationToken = user.generateEmailConfirmationToken();
     await user.save();
 
-    const emailConfirmationUrl =
-      process.env.NODE_ENV === 'dev'
-        ? `${process.env.BASE_URL}:${process.env.PORT}/confirm-email/${emailConfirmationToken}`
-        : `${process.env.BASE_URL}/confirm-email/${emailConfirmationToken}`;
-
+    const emailConfirmationUrl = generateEmailUrl(
+      emailConfirmationToken,
+      'confirm-email'
+    );
+    
     const isEmailSent = await sendEmail({
       to: newUser.email,
-      subject: 'Confirm your email',
+      subject: EMAIL_SUBJECT_CONFIRM_EMAIL,
       html: confirmAccountEmail(emailConfirmationUrl),
     });
 
@@ -54,7 +56,7 @@ export const createUser = asyncHandler(
 
       return;
     }
-    
+
     return next(new ErrorResponse('Invalid data.', 400));
   }
 );

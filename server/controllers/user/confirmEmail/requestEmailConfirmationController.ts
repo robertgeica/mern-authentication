@@ -1,4 +1,5 @@
 import { Response, Request } from 'express';
+import { EMAIL_SUBJECT_CONFIRM_EMAIL } from '../../../constants';
 import asyncHandler from '../../../middleware/asyncHandler';
 import User from '../../../models/User';
 import sendEmail from '../../../modules/emailSender';
@@ -34,7 +35,7 @@ export const requestEmailConfirmation = asyncHandler(
 
       await sendEmail({
         to: user.email,
-        subject: 'Confirm your email',
+        subject: EMAIL_SUBJECT_CONFIRM_EMAIL,
         html: confirmAccountEmail(emailConfirmationUrl),
       });
 

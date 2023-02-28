@@ -6,6 +6,7 @@ import { isValidEmail } from '../../../utils/validateEmail';
 import { confirmChangeEmail } from '../../../utils/emailTemplates';
 import ErrorResponse from '../../../utils/errorResponse';
 import { generateEmailUrl } from '../../../utils/generateEmailUrl';
+import { EMAIL_SUBJECT_CONFIRM_EMAIL_CHANGE_1 } from '../../../constants';
 
 // @route         POST /api/v1/users/change-email
 // @description   Send link to confirm email change
@@ -42,7 +43,7 @@ export const requestEmailChange = asyncHandler(
 
       await sendEmail({
         to: user.email,
-        subject: 'Confirm your email change 1/2',
+        subject: EMAIL_SUBJECT_CONFIRM_EMAIL_CHANGE_1,
         html: confirmChangeEmail(confirmChangeEmailUrl),
       });
 
