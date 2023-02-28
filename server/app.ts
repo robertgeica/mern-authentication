@@ -21,7 +21,13 @@ app.use(routes);
 // mount error handler middleware
 app.use(errorHandler);
 
-const PORT: string | number = process.env.PORT || 4000;
+// check if port was defined
+if (!process.env.PORT) {
+  console.error('PORT is not defined');
+  process.exit(1);
+}
+
+const PORT: string | number = process.env.PORT;
 
 app.listen(PORT, () => {
   console.log('Server is running on port', PORT);

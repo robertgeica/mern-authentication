@@ -38,6 +38,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.2",
     "nodemailer": "^6.9.1",
-    "sharp": "^0.31.3"
+    "sharp": "^0.31.3",
+    "twilio": "^4.8.0"
   }
 }

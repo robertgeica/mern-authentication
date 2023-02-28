@@ -35,7 +35,7 @@ const userSchema: Schema = new Schema<IUser>(
       required: true,
       default: 'user',
     },
-    phoneNumber: { type: Number },
+    phoneNumber: { type: String },
     avatar: {
       url: { type: String },
       mimeType: { type: String },
