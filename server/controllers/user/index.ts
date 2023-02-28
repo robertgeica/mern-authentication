@@ -11,3 +11,5 @@ export { confirmPasswordReset } from './resetPassword/confirmPasswordResetContro
 export { uploadUserImage } from './uploadUserImageController';
 export { requestEmailChange } from './changeEmail/requestEmailChangeController';
 export { confirmEmailChange } from './changeEmail/confirmEmailChangeController';
+export { requestPhoneNumberConfirmation } from './confirmPhoneNumber/requestPhoneNumberConfirmationController';
+// export { confirmPhoneNumber } from './confirmPhoneNumber/confirmPhoneNumberController';
