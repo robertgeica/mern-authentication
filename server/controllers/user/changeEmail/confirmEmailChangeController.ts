@@ -5,7 +5,7 @@ import ErrorResponse from '../../../utils/errorResponse';
 import asyncHandler from '../../../middleware/asyncHandler';
 import sendEmail from '../../../modules/emailSender';
 import { confirmChangeEmail, confirmEmailChanged } from '../../../utils/emailTemplates';
-import { changeEmailUrl } from '../../../utils/changeEmailUrl';
+import { generateEmailUrl } from '../../../utils/generateEmailUrl';
 
 // @route         PUT /api/v1/users/change-email/:token
 // @description   Confirm email change
@@ -45,8 +45,8 @@ export const confirmEmailChange = asyncHandler(
       );
 
       try {
-        const confirmChangeEmailUrl = changeEmailUrl(
-          emailChangeConfirmationToken
+        const confirmChangeEmailUrl = generateEmailUrl(
+          emailChangeConfirmationToken, 'change-email'
         );
 
         await sendEmail({

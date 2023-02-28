@@ -5,7 +5,7 @@ import sendEmail from '../../../modules/emailSender';
 import { isValidEmail } from '../../../utils/validateEmail';
 import { confirmChangeEmail } from '../../../utils/emailTemplates';
 import ErrorResponse from '../../../utils/errorResponse';
-import { changeEmailUrl } from '../../../utils/changeEmailUrl';
+import { generateEmailUrl } from '../../../utils/generateEmailUrl';
 
 // @route         POST /api/v1/users/change-email
 // @description   Send link to confirm email change
@@ -36,8 +36,8 @@ export const requestEmailChange = asyncHandler(
     await user.save();
 
     try {
-      const confirmChangeEmailUrl = changeEmailUrl(
-        emailChangeConfirmationToken
+      const confirmChangeEmailUrl = generateEmailUrl(
+        emailChangeConfirmationToken, 'change-email'
       );
 
       await sendEmail({

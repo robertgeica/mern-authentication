@@ -5,6 +5,7 @@ import sendEmail from '../../../modules/emailSender';
 import { IUser } from '../../../types/User';
 import { resetPasswordEmail } from '../../../utils/emailTemplates';
 import ErrorResponse from '../../../utils/errorResponse';
+import { generateEmailUrl } from '../../../utils/generateEmailUrl';
 
 // @route         POST /api/v1/users/reset-password
 // @description   Send link to reset password via email
@@ -22,11 +23,8 @@ export const requestPasswordReset = asyncHandler(
       const resetToken = user.generateResetPasswordToken();
       await user.save();
 
-      const resetPasswordUrl =
-        process.env.NODE_ENV === 'dev'
-          ? `${process.env.BASE_URL}:${process.env.PORT}/password-reset/${resetToken}`
-          : `${process.env.BASE_URL}/password-reset/${resetToken}`;
-
+      const resetPasswordUrl = generateEmailUrl(resetToken, 'password-reset');
+   
       await sendEmail({
         to: user.email,
         subject: 'Reset your password',

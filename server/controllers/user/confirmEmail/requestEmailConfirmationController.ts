@@ -5,6 +5,7 @@ import sendEmail from '../../../modules/emailSender';
 import { IUser } from '../../../types/User';
 import { confirmAccountEmail } from '../../../utils/emailTemplates';
 import ErrorResponse from '../../../utils/errorResponse';
+import { generateEmailUrl } from '../../../utils/generateEmailUrl';
 
 // @route         POST /api/v1/users/confirm-email
 // @description   Send link to confirm email
@@ -26,10 +27,10 @@ export const requestEmailConfirmation = asyncHandler(
       const emailConfirmationToken = user.generateEmailConfirmationToken();
       await user.save();
 
-      const emailConfirmationUrl =
-        process.env.NODE_ENV === 'dev'
-          ? `${process.env.BASE_URL}:${process.env.PORT}/confirm-email/${emailConfirmationToken}`
-          : `${process.env.BASE_URL}/confirm-email/${emailConfirmationToken}`;
+      const emailConfirmationUrl = generateEmailUrl(
+        emailConfirmationToken,
+        'confirm-email'
+      );
 
       await sendEmail({
         to: user.email,

@@ -58,7 +58,6 @@ const userSchema: Schema = new Schema<IUser>(
 
     newEmail: {
       type: String,
-      unique: true,
       validate: [isValidEmail, 'Email adress must be valid.'],
     },
     changeEmailStepOneToken: { type: String },
