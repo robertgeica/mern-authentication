@@ -20,7 +20,7 @@ export const loginUser = asyncHandler(
     }
 
     if (user && isPasswordMatch) {
-      res.json({
+      res.status(200).json({
         success: true,
         message: 'User logged in successfully.',
         authToken: user.getSignedJwtToken(),

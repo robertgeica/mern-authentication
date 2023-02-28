@@ -24,7 +24,7 @@ export const getLoggedUser = asyncHandler(
     }
 
     if (user) {
-      res.json({
+      res.status(200).json({
         success: true,
         message: 'Logged in user found.',
         user: user._doc,

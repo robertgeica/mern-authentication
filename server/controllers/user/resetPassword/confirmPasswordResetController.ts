@@ -30,7 +30,7 @@ export const confirmPasswordReset = asyncHandler(
 
     await user.save();
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: 'Your password was reseted successfully.',
       token: user.getSignedJwtToken(),

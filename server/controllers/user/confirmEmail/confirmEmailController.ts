@@ -29,7 +29,7 @@ export const confirmEmail = asyncHandler(
 
     await user.save();
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: 'Your email was confirmed successfully.',
       token: user.getSignedJwtToken(),

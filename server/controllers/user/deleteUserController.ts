@@ -26,7 +26,7 @@ export const deleteUser = asyncHandler(
       // delete other user resources
       // await Model.deleteMany({ user_id: req.user._id });
 
-      res.status(201).json({
+      res.status(204).json({
         success: true,
         message: 'Your account and all your data was deleted.',
       });

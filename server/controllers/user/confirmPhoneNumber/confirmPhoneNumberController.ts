@@ -30,7 +30,7 @@ export const confirmPhoneNumber = asyncHandler(
 
     await user.save();
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: 'Your phone number was confirmed successfully.',
       token: user.getSignedJwtToken(),

@@ -25,7 +25,7 @@ export const getUser = asyncHandler(
     }
 
     if (user) {
-      res.json({
+      res.status(200).json({
         success: true,
         message: 'User found.',
         data: user._doc,
