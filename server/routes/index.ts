@@ -18,7 +18,7 @@ import {
   requestPhoneNumberConfirmation,
   confirmPhoneNumber,
 } from '../controllers/user';
-import protect from '../middleware/authMiddleware';
+import { authorize, protect } from '../middleware/authMiddleware';
 import {
   allowMultiple,
   fileExtensionLimiter,
@@ -42,7 +42,7 @@ router.route('/api/v1/users/logged-user').get(protect, getLoggedUser);
 router.route('/api/v1/users/confirm-email').post(requestEmailConfirmation);
 router.route('/api/v1/users/confirm-email/:token').put(confirmEmail);
 
-router.route('/api/v1/users/confirm-phone').post(protect, requestPhoneNumberConfirmation);
+router.route('/api/v1/users/confirm-phone').post(protect, authorize(['user']), requestPhoneNumberConfirmation);
 router.route('/api/v1/users/confirm-phone/:token').put(protect, confirmPhoneNumber);
 
 router.route('/api/v1/users/reset-password').post(requestPasswordReset);

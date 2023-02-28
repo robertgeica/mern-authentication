@@ -32,6 +32,7 @@ export const requestPhoneNumberConfirmation = asyncHandler(
 
     const isPhoneNumberUsed = await User.findOne({
       phoneNumber: req.body.phoneNumber,
+      _id: { $ne: user._id },
     });
     if (isPhoneNumberUsed) {
       return next(new ErrorResponse('Phone number is already used.', 400));
