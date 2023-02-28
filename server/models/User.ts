@@ -7,6 +7,7 @@ import { isValidEmail } from '../utils/validateEmail';
 import { isValidPassword } from '../utils/validatePassword';
 import { HOURS_12, HOURS_24 } from '../constants';
 import { generateOtpCode } from '../utils/generateOtp';
+import { isValidPhoneNumber } from '../utils/validatePhoneNumber';
 
 const userSchema: Schema = new Schema<IUser>(
   {
@@ -36,7 +37,11 @@ const userSchema: Schema = new Schema<IUser>(
       required: true,
       default: 'user',
     },
-    phoneNumber: { type: String, unique: true },
+    phoneNumber: {
+      type: String,
+      unique: true,
+      validate: [isValidPhoneNumber, 'Your phone number must be valid.'],
+    },
     avatar: {
       url: { type: String },
       mimeType: { type: String },

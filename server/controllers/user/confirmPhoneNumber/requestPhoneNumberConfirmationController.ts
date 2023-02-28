@@ -3,6 +3,7 @@ import asyncHandler from '../../../middleware/asyncHandler';
 import User from '../../../models/User';
 import sendSms from '../../../modules/smsSender';
 import ErrorResponse from '../../../utils/errorResponse';
+import { isValidPhoneNumber } from '../../../utils/validatePhoneNumber';
 
 // @route         POST /api/v1/users/confirm-phone
 // @description   Send confirmation code to phone number
@@ -21,11 +22,23 @@ export const requestPhoneNumberConfirmation = asyncHandler(
     }
 
     if (!phoneNumber) {
-      return next(new ErrorResponse('Add a phone number first.', 400))
+      return next(new ErrorResponse('Add a phone number first.', 400));
+    }
+
+    if (!isValidPhoneNumber(phoneNumber)) {
+      return next(new ErrorResponse('Provide a valid phone number.', 400));
+    }
+
+    const isPhoneNumberUsed = await User.findOne({
+      phoneNumber: req.body.phoneNumber,
+    });
+    if (isPhoneNumberUsed) {
+      return next(new ErrorResponse('Phone number is already used.', 400));
     }
 
     try {
-      const phoneNumberConfirmationToken = user.generatePhoneNumberConfirmationToken();
+      const phoneNumberConfirmationToken =
+        user.generatePhoneNumberConfirmationToken();
       user.phoneNumber = user.phoneNumber || req.body.phoneNumber;
 
       await user.save();
