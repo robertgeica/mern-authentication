@@ -40,4 +40,9 @@ export interface IUser extends Document {
   changeEmailStepTwoToken?: string;
   changeEmailStepTwoExpire?: Date;
   isEmailChangeStepTwoConfirmed: boolean;
+
+  // Phone number confirmation
+  isPhoneNumberConfirmed: boolean;
+  phoneNumberConfirmationToken?: string;
+  phoneNumberConfirmationExpire?: Date;
 }

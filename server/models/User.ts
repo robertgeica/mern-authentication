@@ -6,6 +6,7 @@ import { IUser } from '../types/User';
 import { isValidEmail } from '../utils/validateEmail';
 import { isValidPassword } from '../utils/validatePassword';
 import { HOURS_12, HOURS_24 } from '../constants';
+import { generateOtpCode } from '../utils/generateOtp';
 
 const userSchema: Schema = new Schema<IUser>(
   {
@@ -35,7 +36,7 @@ const userSchema: Schema = new Schema<IUser>(
       required: true,
       default: 'user',
     },
-    phoneNumber: { type: String },
+    phoneNumber: { type: String, unique: true },
     avatar: {
       url: { type: String },
       mimeType: { type: String },
@@ -61,6 +62,10 @@ const userSchema: Schema = new Schema<IUser>(
     changeEmailStepTwoToken: { type: String },
     changeEmailStepTwoExpire: { type: Date },
     isEmailChangeStepTwoConfirmed: { type: Boolean },
+
+    isPhoneNumberConfirmed: { type: Boolean, required: true, default: false },
+    phoneNumberConfirmationToken: { type: String },
+    phoneNumberConfirmationExpire: { type: Date },
   },
   { timestamps: true }
 );
@@ -119,6 +124,18 @@ userSchema.methods.generateEmailChangeToken = function (
   this[tokenKey] = crypto.createHash('sha256').update(token).digest('hex');
 
   this[tokenExpire] = Date.now() + HOURS_12;
+
+  return token;
+};
+
+userSchema.methods.generatePhoneNumberConfirmationToken = function () {
+  const token = generateOtpCode();
+
+  this.phoneNumberConfirmationToken = crypto
+    .createHash('sha256')
+    .update(token)
+    .digest('hex');
+  this.phoneNumberConfirmationExpire = Date.now() + HOURS_24;
 
   return token;
 };
