@@ -1,5 +1,4 @@
-import { Response, Request } from 'express';
-import { HOURS_24 } from '../../../constants';
+import { Response } from 'express';
 import asyncHandler from '../../../middleware/asyncHandler';
 import User from '../../../models/User';
 import sendSms from '../../../modules/smsSender';

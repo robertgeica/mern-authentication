@@ -16,6 +16,7 @@ import {
   requestEmailChange,
   confirmEmailChange,
   requestPhoneNumberConfirmation,
+  confirmPhoneNumber,
 } from '../controllers/user';
 import protect from '../middleware/authMiddleware';
 import {
@@ -42,7 +43,7 @@ router.route('/api/v1/users/confirm-email').post(requestEmailConfirmation);
 router.route('/api/v1/users/confirm-email/:token').put(confirmEmail);
 
 router.route('/api/v1/users/confirm-phone').post(protect, requestPhoneNumberConfirmation);
-// router.route('/api/v1/users/confirm-email/:token').put(confirmEmail);
+router.route('/api/v1/users/confirm-phone/:token').put(protect, confirmPhoneNumber);
 
 router.route('/api/v1/users/reset-password').post(requestPasswordReset);
 router.route('/api/v1/users/reset-password/:token').put(confirmPasswordReset);
