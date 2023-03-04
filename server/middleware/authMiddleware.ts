@@ -44,7 +44,6 @@ const protect = asyncHandler(
 
 const authorize = (roles: string[]) => {
   return (req: any, res: any, next: any) => {
-    console.log(roles);
     if (!roles.includes(req.user.role)) {
       return next(new ErrorResponse(`You are not authorized.`, 403));
     }

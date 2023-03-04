@@ -4,6 +4,7 @@ export { confirmEmail } from './confirmEmail/confirmEmailController';
 export { loginUser } from './/loginUserController';
 export { getLoggedUser } from './getLoggedUserController';
 export { getUser } from './getUserController';
+export { getUsers } from './getUsersController';
 export { deleteUser } from './deleteUserController';
 export { updateUser } from './updateUserController';
 export { requestPasswordReset} from './resetPassword/requestPasswordResetController';
