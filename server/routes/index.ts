@@ -8,6 +8,7 @@ import {
   loginUser,
   getLoggedUser,
   getUser,
+  getUsers,
   deleteUser,
   updateUser,
   requestPasswordReset,
@@ -25,11 +26,14 @@ import {
   filesExists,
   fileSizeLimiter,
 } from '../middleware/imageUpload';
+import { advanceQuery } from '../middleware/advanceQuery';
+import User from '../models/User';
 
 const router: Router = Router();
 
 router
   .route('/api/v1/users')
+  .get(protect, authorize(['admin']), advanceQuery(User), getUsers)
   .post(createUser)
   .patch(protect, updateUser)
   .delete(protect, deleteUser);
@@ -37,13 +41,18 @@ router
 router.route('/api/v1/users/login').post(loginUser);
 
 router.route('/api/v1/users/:id').get(protect, getUser);
+router.route('/api/v1/users');
 router.route('/api/v1/users/logged-user').get(protect, getLoggedUser);
 
 router.route('/api/v1/users/confirm-email').post(requestEmailConfirmation);
 router.route('/api/v1/users/confirm-email/:token').put(confirmEmail);
 
-router.route('/api/v1/users/confirm-phone').post(protect, authorize(['user']), requestPhoneNumberConfirmation);
-router.route('/api/v1/users/confirm-phone/:token').put(protect, confirmPhoneNumber);
+router
+  .route('/api/v1/users/confirm-phone')
+  .post(protect, requestPhoneNumberConfirmation);
+router
+  .route('/api/v1/users/confirm-phone/:token')
+  .put(protect, confirmPhoneNumber);
 
 router.route('/api/v1/users/reset-password').post(requestPasswordReset);
 router.route('/api/v1/users/reset-password/:token').put(confirmPasswordReset);

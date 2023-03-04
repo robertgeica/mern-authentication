@@ -12,21 +12,13 @@ interface IRequest extends Request {
 // @description   Get users
 // @access        Private, authorized
 export const getUsers = asyncHandler(
-  async (req: IRequest, res: Response, next: Function): Promise<void> => {
+  async (_req: IRequest, res: any, next: Function): Promise<void> => {
     const users: IUser[] = await User.find();
 
     if (!users) {
-      return next(
-        new ErrorResponse(`Users not found.`, 404)
-      );
+      return next(new ErrorResponse(`Users not found.`, 404));
     }
 
-    if (users) {
-      res.status(200).json({
-        success: true,
-        message: 'Users found.',
-        data: users,
-      });
-    }
+    return res.status(200).json({ ...res.advanceQuery });
   }
 );
