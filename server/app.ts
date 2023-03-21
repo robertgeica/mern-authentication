@@ -7,6 +7,7 @@ import { errorHandler } from './middleware/errorHandler';
 import { xssClean } from './middleware/xssClean';
 import { securityHeaders } from './middleware/securityHeaders';
 import { rateLimiter } from './middleware/rateLimiter';
+import { hpp } from './middleware/hpp';
 
 import routes from './routes/index';
 
@@ -33,6 +34,8 @@ app.use(xssClean);
 // apply rate limiting to all requests
 app.use(rateLimiter)
 
+// prevent http params pollution
+app.use(hpp);
 
 // mount router middleware
 app.use(routes);
