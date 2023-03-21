@@ -5,6 +5,8 @@ import mongoSanitize from 'express-mongo-sanitize';
 import { connectDatabase } from './database/database';
 import { errorHandler } from './middleware/errorHandler';
 import routes from './routes/index';
+import { xssClean } from './middleware/xssClean';
+
 dotenv.config();
 
 // connect db
@@ -15,7 +17,12 @@ const app: Express = express();
 // mount middlewares
 app.use(cors());
 app.use(express.json());
+
+// sanitize data
 app.use(mongoSanitize());
+
+// add xss protection
+app.use(xssClean);
 
 // mount router middleware
 app.use(routes);
