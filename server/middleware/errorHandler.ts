@@ -15,7 +15,7 @@ export const errorHandler = (
   }
 
   if (err.name === 'CastError') {
-    const message = `Cound not find resource with id ${err.value}`;
+    const message = `Cound not find resource.`;
     error = new ErrorResponse(message, 404);
   }
 
