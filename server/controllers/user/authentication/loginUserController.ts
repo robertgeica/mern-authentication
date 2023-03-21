@@ -1,8 +1,8 @@
 import { Response, Request } from 'express';
-import asyncHandler from '../../middleware/asyncHandler';
-import User from '../../models/User';
-import { IUser } from '../../types/User';
-import ErrorResponse from '../../utils/errorResponse';
+import asyncHandler from '../../../middleware/asyncHandler';
+import User from '../../../models/User';
+import { IUser } from '../../../types/User';
+import ErrorResponse from '../../../utils/errorResponse';
 
 // @route         POST /api/v1/users/login
 // @description   Login user

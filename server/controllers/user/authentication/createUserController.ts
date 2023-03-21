@@ -1,12 +1,12 @@
 import { Response, Request } from 'express';
-import asyncHandler from '../../middleware/asyncHandler';
-import User from '../../models/User';
-import { IUser } from '../../types/User';
-import sendEmail from '../../modules/emailSender';
-import { confirmAccountEmail } from '../../utils/emailTemplates';
-import ErrorResponse from '../../utils/errorResponse';
-import { generateEmailUrl } from '../../utils/generateEmailUrl';
-import { EMAIL_SUBJECT_CONFIRM_EMAIL } from '../../constants';
+import asyncHandler from '../../../middleware/asyncHandler';
+import User from '../../../models/User';
+import { IUser } from '../../../types/User';
+import sendEmail from '../../../modules/emailSender';
+import { confirmAccountEmail } from '../../../utils/emailTemplates';
+import ErrorResponse from '../../../utils/errorResponse';
+import { generateEmailUrl } from '../../../utils/generateEmailUrl';
+import { EMAIL_SUBJECT_CONFIRM_EMAIL } from '../../../constants';
 
 // @route         POST /api/v1/user
 // @description   Register user

@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import asyncHandler from './asyncHandler';
 import ErrorResponse from '../utils/errorResponse';
+import { SELECT_AUTH_USER_FIELDS } from '../constants';
 
 interface JwtPayload {
   id: string;
@@ -25,7 +26,7 @@ const protect = asyncHandler(
         ) as JwtPayload;
 
         req.user = await User.findById(decoded.id).select(
-          '-password -twoFactorAuthCode -emailConfirmationToken -resetPasswordToken'
+          SELECT_AUTH_USER_FIELDS
         );
 
         next();
