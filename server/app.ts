@@ -6,6 +6,8 @@ import { connectDatabase } from './database/database';
 import { errorHandler } from './middleware/errorHandler';
 import { xssClean } from './middleware/xssClean';
 import { securityHeaders } from './middleware/securityHeaders';
+import { rateLimiter } from './middleware/rateLimiter';
+
 import routes from './routes/index';
 
 dotenv.config();
@@ -27,6 +29,10 @@ app.use(securityHeaders);
 
 // add xss protection
 app.use(xssClean);
+
+// apply rate limiting to all requests
+app.use(rateLimiter)
+
 
 // mount router middleware
 app.use(routes);
