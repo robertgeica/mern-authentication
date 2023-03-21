@@ -4,8 +4,9 @@ import dotenv from 'dotenv';
 import mongoSanitize from 'express-mongo-sanitize';
 import { connectDatabase } from './database/database';
 import { errorHandler } from './middleware/errorHandler';
-import routes from './routes/index';
 import { xssClean } from './middleware/xssClean';
+import { securityHeaders } from './middleware/securityHeaders';
+import routes from './routes/index';
 
 dotenv.config();
 
@@ -20,6 +21,9 @@ app.use(express.json());
 
 // sanitize data
 app.use(mongoSanitize());
+
+// add security headers
+app.use(securityHeaders);
 
 // add xss protection
 app.use(xssClean);
