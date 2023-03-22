@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import asyncHandler from '../../middleware/asyncHandler';
-import User from '../../models/User';
-import { imageUpload } from '../../modules/imageUpload';
-import { IUser } from '../../types/User';
-import ErrorResponse from '../../utils/errorResponse';
+import asyncHandler from '../../../middleware/asyncHandler';
+import ErrorResponse from '../../../utils/errorResponse';
+import { IUser } from '../../../types/User';
+import User from '../../../models/User';
+import { imageUpload } from '../../../modules/imageUpload';
 
 interface IRequest extends Request {
   user: IUser;

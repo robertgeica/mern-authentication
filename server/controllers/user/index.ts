@@ -9,7 +9,7 @@ export { deleteUser } from './deleteUserController';
 export { updateUser } from './updateUserController';
 export { requestPasswordReset} from './resetPassword/requestPasswordResetController';
 export { confirmPasswordReset } from './resetPassword/confirmPasswordResetController';
-export { uploadUserImage } from './uploadUserImageController';
+export { uploadUserImage } from './uploadImage/uploadUserImageController';
 export { requestEmailChange } from './changeEmail/requestEmailChangeController';
 export { confirmEmailChange } from './changeEmail/confirmEmailChangeController';
 export { requestPhoneNumberConfirmation } from './confirmPhoneNumber/requestPhoneNumberConfirmationController';
