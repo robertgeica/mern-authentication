@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Input, TextLink } from '../../components';
+import { useState } from 'react';
+import { Button, Input, TextLink } from '../../components';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -50,9 +49,7 @@ const Login = () => {
           <TextLink to='/forgot-password' text='Forgot your password?' />
         </div>
 
-        <button className='button' type='submit'>
-          Log in
-        </button>
+        <Button type='submit'>Log in</Button>
       </form>
     </div>
   );

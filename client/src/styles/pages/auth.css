@@ -12,24 +12,9 @@
   margin: 0;
 }
 
-.text-description {
-  color: #7a7a7a;
+.auth-description {
+  color: var(--description-color);
 }
-
-
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  width: 350px;
-  box-shadow: -0 0 #0000, 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  margin-top: 2em;
-  padding: 3em 1em 2em;
-}
-
 
 .forgot-password {
   display: flex;
@@ -37,35 +22,4 @@ form {
   width: 90%;
   margin: auto;
   padding: 0 0 20px;
-}
-
-.forgot-password a {
-  text-decoration: none;
-  color: #3e89ed;
-}
-
-.forgot-password a:hover {
-  color: #0560d8;
-}
-
-.button {
-  width: 90%;
-  padding: 10px;
-
-  border: none;
-  border-radius: 5px;
-  background-color: #3e89ed;
-  font-size: 16px;
-  font-weight: 500;
-  color: #ffffff;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.button:hover {
-  background-color: #0560d8;
-}
-
-.button:active {
-  box-shadow: inset 0px 0px 0px 2px #000;
 }

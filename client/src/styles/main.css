@@ -13,7 +13,7 @@
   --box-shadow-color-dark: #0000001a;
   --page-bg: #f8fafc;
   --main-color: #0a66c2;
-  --black-color: #000;
+  --black-color: #0000;
   --white-color: #fff;
   --grey-color: #333;
   --active-text-color-light: #ffffffb3;
@@ -23,9 +23,24 @@
   --text-link-color: #3e89ed;
   --text-link-color-hover: #0560d8;
   --border-color-light: #d1d5db;
+  --description-color: #7a7a7a;
+}
 
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white-color);
+  border-radius: 0.5rem;
+  width: 350px;
+  box-shadow: -0 0 var(--black-color), 0 1px 3px 0 var(--box-shadow-color-dark);
+  margin-top: 2em;
+  padding: 3em 1em 2em;
 }
 
 .round {
   border-radius: 50%;
 }
+
+

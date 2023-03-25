@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Input, TextLink } from '../../components';
+import { useState } from 'react';
+import { Button, Input, TextLink } from '../../components';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -59,9 +59,7 @@ const Register = () => {
           required
         />
 
-        <button className='button' type='submit'>
-          Get started
-        </button>
+        <Button type='submit'>Get started</Button>
       </form>
     </div>
   );

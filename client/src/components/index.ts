@@ -7,4 +7,5 @@ export { default as PageContainer } from './PageContainer';
 export { default as WaveWrapper } from './WaveWrapper';
 export { default as TextLink } from './TextLink';
 export { default as Input } from './Input';
+export { default as Button } from './Button';
 
