@@ -21,7 +21,7 @@
 
 .button:active {
   background: var(--active-button-bg);
-  color: var(--active-text-color);
+  color: var(--active-text-color-light);
 }
 
 .outlined {
@@ -38,5 +38,5 @@
 
 .outlined:active {
   background-color: var(--main-color);
-  color: var(--active-text-color);
+  color: var(--active-text-color-light);
 }

@@ -11,6 +11,10 @@
   color: var(--black-color);
 }
 
+.nav-link:active {
+  color: var(--active-text-color-dark);
+}
+
 .nav-link:before {
   content: '';
   position: absolute;
