@@ -9,9 +9,9 @@
 .page-container {
   width: 80%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px;
   text-align: center;
-  height: 90vh;
+  height: calc(100vh - 68px)
 }
 
 .wave-wrapper {
