@@ -1,0 +1,100 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 5em;
+}
+
+.header-nav,
+.auth-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-img {
+  height: 3rem;
+  margin-right: 2em;
+  border-radius: 50%;
+}
+
+.nav-links {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 1rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: #000;
+}
+
+.nav-links a:before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: #0a66c2;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover:before {
+  width: 100%;
+}
+
+.auth-button {
+  all: unset;
+  box-sizing: border-box;
+  padding: 0.5em 1em;
+  margin-left: 15px;
+  align-items: center;
+  border-radius: 100px;
+  background-color: #0a66c2;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  line-height: 20px;
+  min-height: 40px;
+}
+
+.auth-button:hover,
+.auth-button:focus {
+  background-color: #16437e;
+  color: #ffffff;
+}
+
+.auth-button:active {
+  background: #0e3459;
+  color: #ffffffb3;
+}
+
+.login-button {
+  background: none;
+  color: #000;
+  border: 1px solid #fff;
+}
+
+.login-button:hover {
+  background: none;
+  color: #333;
+  border: 1px solid #16437e;
+}
+
+.login-button:active {
+  background: #0a66c2;
+}
