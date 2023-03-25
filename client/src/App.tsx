@@ -2,7 +2,7 @@ import React from 'react';
 import { QueryCache, QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
-import { Home, Login } from './pages';
+import { Home, Login, Register } from './pages';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,7 +29,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
-          {/* <Route path='/register' element={<Register />} /> */}
+          <Route path='/register' element={<Register />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

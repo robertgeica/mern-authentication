@@ -19,7 +19,6 @@
 .login-description a {
   text-decoration: none;
   color: #3e89ed;
-  font-weight: 600;
 }
 
 .login-description a:hover {
@@ -78,7 +77,6 @@ form {
 .forgot-password a {
   text-decoration: none;
   color: #3e89ed;
-  font-weight: 600;
 }
 
 .forgot-password a:hover {
