@@ -4,8 +4,7 @@
   padding: 0.5rem 5em;
 }
 
-.header-container,
-.auth-buttons {
+.header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,48 +23,4 @@
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-
-
-.auth-button {
-  all: unset;
-  box-sizing: border-box;
-  padding: 0.5em 1em;
-  margin-left: 15px;
-  align-items: center;
-  border-radius: 100px;
-  background-color: var(--main-color);
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-flex;
-  line-height: 20px;
-  min-height: 40px;
-}
-
-.auth-button:hover,
-.auth-button:focus {
-  background-color: #16437e;
-  color: #ffffff;
-}
-
-.auth-button:active {
-  background: #0e3459;
-  color: #ffffffb3;
-}
-
-.login-button {
-  background: none;
-  color: var(--black-color);
-  border: 1px solid #fff;
-}
-
-.login-button:hover {
-  background: none;
-  color: var(--grey-color);
-  border: 1px solid #16437e;
-}
-
-.login-button:active {
-  background-color: var(--main-color);
 }

@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { NavLink, Image } from '.';
+import { NavLink, Image, ButtonGroup, ButtonLink } from '.';
 
 const Header = () => {
   return (
@@ -26,14 +25,10 @@ const Header = () => {
         </nav>
       </div>
 
-      <div className='auth-buttons'>
-        <Link to='/login' className='auth-button login-button'>
-          Login
-        </Link>
-        <Link to='/register' className='auth-button'>
-          Register
-        </Link>
-      </div>
+      <ButtonGroup>
+        <ButtonLink to='/login' text='Login' variant='outlined' />
+        <ButtonLink to='/register' text='Register' />
+      </ButtonGroup>
     </header>
   );
 };

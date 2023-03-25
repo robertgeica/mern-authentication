@@ -2,11 +2,17 @@
 @import url(./pages/login.css);
 @import url(./components/header.css);
 @import url(./components/nav-link.css);
+@import url(./components/button-group.css);
+@import url(./components/button.css);
 
 :root {
   --main-color: #0a66c2;
   --black-color: #000;
+  --white-color: #fff;
   --grey-color: #333;
+  --active-text-color: #ffffffb3;
+  --active-button-bg: #0e3459;
+  --hover-button-bg: #16437e;
 }
 
 .round {
@@ -18,7 +24,7 @@
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
-  height: calc(100vh - 68px)
+  height: calc(100vh - 64px)
 }
 
 .wave-wrapper {
