@@ -1,8 +1,8 @@
 import React from 'react';
 import { QueryCache, QueryClient, QueryClientProvider } from 'react-query';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
-import Home from './pages/Home';
+import { Home, Login } from './pages';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,15 +25,21 @@ const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-      <Header />
+      <HeaderWrapper />
         <Routes>
           <Route path='/' element={<Home />} />
-          {/* <Route path='/login' element={<Login />} /> */}
+          <Route path='/login' element={<Login />} />
           {/* <Route path='/register' element={<Register />} /> */}
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
   );
 };
+
+const HeaderWrapper = () => {
+  const location = useLocation();
+  const hideHeader = ['/login', '/register'].includes(location.pathname);
+  return hideHeader ? null : <Header />;
+}
 
 export default App;
