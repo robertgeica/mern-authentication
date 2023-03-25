@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Input, TextLink } from '../../components';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -19,47 +20,39 @@ const Login = () => {
   };
 
   return (
-    <div className='login-screen'>
-      <h1 className='login-title'>👋 Welcome traveler!</h1>
-      <p className='login-description'>
+    <div className='auth-screen'>
+      <h1 className='auth-title'>👋 Welcome traveler!</h1>
+      <p className='auth-description'>
         Login to your account or{' '}
-        <Link to='/register'>create a new account</Link>
+        <TextLink to='/register' text='create a new account' />
       </p>
 
       <form onSubmit={handleSubmit}>
-        <div className='input-group'>
-          <label className='input-label' htmlFor='email'>
-            Email address
-          </label>
-          <input
-            className='input'
-            type='email'
-            id='email'
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
-        </div>
+        <Input
+          label='Email address'
+          type='email'
+          description='Email address'
+          value={email}
+          onChange={handleEmailChange}
+          required
+        />
 
-        <div className='input-group'>
-          <label className='input-label' htmlFor='password'>
-            Password
-          </label>
-          <input
-            className='input'
-            type='password'
-            id='password'
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-        </div>
+        <Input
+          label='Password'
+          type='password'
+          description='Password'
+          value={password}
+          onChange={handlePasswordChange}
+          required
+        />
 
         <div className='forgot-password'>
-          <Link to='/forgot-password'>Forgot your password?</Link>
+          <TextLink to='/forgot-password' text='Forgot your password?' />
         </div>
 
-        <button className="button" type='submit'>Log in</button>
+        <button className='button' type='submit'>
+          Log in
+        </button>
       </form>
     </div>
   );

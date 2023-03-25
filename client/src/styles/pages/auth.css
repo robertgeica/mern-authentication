@@ -1,29 +1,21 @@
-.login-screen {
+.auth-screen {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f8fafc;
+  background-color: var(--page-bg);
 }
 
-.login-title {
+.auth-title {
   padding: 0;
   margin: 0;
 }
 
-.login-description {
+.text-description {
   color: #7a7a7a;
 }
 
-.login-description a {
-  text-decoration: none;
-  color: #3e89ed;
-}
-
-.login-description a:hover {
-  color: #0560d8;
-}
 
 form {
   display: flex;
@@ -38,33 +30,6 @@ form {
   padding: 3em 1em 2em;
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  margin-bottom: 20px;
-}
-
-.input-label {
-  margin-bottom: 5px;
-  font-weight: 600;
-  font-size: 14px;
-  color: #333333;
-}
-
-.input {
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  color: #333333;
-  box-shadow: -0 0 #0000, 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  border: 1px solid #d1d5db;
-}
-
-.input:hover {
-  border: 1px solid #3e89ed;
-}
 
 .forgot-password {
   display: flex;
