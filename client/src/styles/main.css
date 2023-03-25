@@ -9,6 +9,10 @@
   --grey-color: #333;
 }
 
+.round {
+  border-radius: 50%;
+}
+
 .page-container {
   width: 80%;
   margin: 0 auto;
