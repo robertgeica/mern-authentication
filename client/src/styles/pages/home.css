@@ -1,0 +1,11 @@
+.home-title {
+  margin-top: 2em;
+}
+
+.home-description {
+  width: 80%;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgb(122, 122, 122);
+}

@@ -5,3 +5,22 @@
   --shadow: 0 0 20px 0 #ccc;
  
 }
+
+.page-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  height: 90vh;
+}
+
+.wave-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3e89ed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2440 100"%3E%3Cpath fill="%23fff" transform="matrix(1, 0, 0, -1, 0, 160)" d="M0,112L48,98.65C96,85.31,192,58.65,288,64C384,69.35,480,107.65,576,110.95C672,114.25,768,80,864,74.65C960,69.35,1056,90.65,1152,96C1248,101.35,1344,90.65,1392,85.31L1440,80L1440,160L1392,160C1344,160,1248,160,1152,160C1056,160,960,160,864,160C768,160,672,160,576,160C480,160,384,160,288,160C192,160,96,160,48,160L0,160Z"%3E%3C/path%3E%3C/svg%3E');
+}
