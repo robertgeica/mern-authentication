@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { Button, Input, TextLink } from '../../components';
+import { Button, Input, Loader, TextLink } from '../../components';
 
 const env = import.meta.env;
 
@@ -42,8 +42,7 @@ const Login = () => {
   );
 
   if (isLoadingLoginUser) {
-    // create loading placeholder comp
-    return <div>loading</div>;
+    return <Loader />;
   }
 
   return (
