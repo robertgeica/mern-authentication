@@ -1,47 +1,38 @@
-import React from 'react';
-import { QueryCache, QueryClient, QueryClientProvider } from 'react-query';
+import React, { useEffect, useState } from 'react';
+import { QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
+import { queryClient } from './config/queryClient';
+import { AuthContext } from './contexts/AuthContext';
 import { Home, Login, Register, NotFound } from './pages';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: false,
-    },
-  },
-  queryCache: new QueryCache({
-    onError: (error: any, query: any) => {
-      if (query.state.status === 'error') {
-        console.log(`Error: ${error.message}`);
-      }
-    },
-  }),
-});
+import { token } from './utils/singletons';
 
 const App: React.FC = () => {
-  const hasToken = localStorage.getItem('auth-token');
+  const [authToken, setAuthToken] = useState<string | null>(token || null);
+
+  useEffect(() => {
+    if (authToken) {
+      localStorage.setItem('auth-token', authToken);
+    } else {
+      localStorage.removeItem('auth-token');
+    }
+  }, [authToken]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <HeaderWrapper />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          {hasToken ? (
-            <></>
-          ) : (
-            <>
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register />} />
-            </>
-          )}
+    <AuthContext.Provider value={{ authToken, setAuthToken }}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <HeaderWrapper />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
 
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </AuthContext.Provider>
   );
 };
 

@@ -1,6 +1,13 @@
-import { NavLink, Image, ButtonGroup, ButtonLink } from '.';
+import { NavLink, Image, ButtonGroup, ButtonLink, Button } from '.';
+import { useAuth } from '../contexts/AuthContext';
 
 const Header = () => {
+  const { authToken, setAuthToken } = useAuth();
+
+  const handleLogout = () => {
+    setAuthToken(null);
+  };
+
   return (
     <header className='header'>
       <div className='header-container'>
@@ -25,8 +32,16 @@ const Header = () => {
       </div>
 
       <ButtonGroup>
-        <ButtonLink to='/login' text='Login' variant='outlined' />
-        <ButtonLink to='/register' text='Register' />
+        {authToken ? (
+          <Button type='submit' variant='outlined' onClick={handleLogout}>
+            Logout
+          </Button>
+        ) : (
+          <>
+            <ButtonLink to='/login' text='Login' variant='outlined' />
+            <ButtonLink to='/register' text='Register' />
+          </>
+        )}
       </ButtonGroup>
     </header>
   );

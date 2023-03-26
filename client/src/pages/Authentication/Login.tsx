@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input, Loader, TextLink } from '../../components';
+import { useAuth } from '../../contexts/AuthContext';
 
 const env = import.meta.env;
 
@@ -12,8 +13,13 @@ interface LoginUser {
 }
 
 const Login = () => {
+  const { authToken, setAuthToken } = useAuth();
   const navigate = useNavigate();
   const [user, setUser] = useState({ email: '', password: '' });
+
+  if (authToken) {
+    navigate('/');
+  }
 
   const onChange = (event: any) => {
     setUser({ ...user, [event.target.type]: event.target.value });
@@ -27,8 +33,7 @@ const Login = () => {
     loginUser,
     {
       onSuccess: (res: any) => {
-        console.log(res.data);
-        localStorage.setItem('auth-token', res.data.authToken);
+        setAuthToken(res.data.authToken);
 
         // show ok notification
 
