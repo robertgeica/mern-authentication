@@ -1,22 +1,50 @@
+import axios from 'axios';
 import { useState } from 'react';
+import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import { Button, Input, TextLink } from '../../components';
 
+const env = import.meta.env;
+
+interface LoginUser {
+  email: string;
+  password: string;
+}
+
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [user, setUser] = useState({ email: '', password: '' });
 
-  const handleEmailChange = (event: any) => {
-    setEmail(event.target.value);
+  const onChange = (event: any) => {
+    setUser({ ...user, [event.target.type]: event.target.value });
   };
 
-  const handlePasswordChange = (event: any) => {
-    setPassword(event.target.value);
-  };
+  function loginUser(values: LoginUser): Promise<any> {
+    return axios.post(`${env.VITE_SERVER_BASE_URL}/api/v1/users/login`, values);
+  }
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    console.log(`Email: ${email}, Password: ${password}`);
-  };
+  const { isLoading: isLoadingLoginUser, mutate: login } = useMutation(
+    loginUser,
+    {
+      onSuccess: (res: any) => {
+        console.log(res.data);
+        localStorage.setItem('auth-token', res.data.authToken);
+
+        // show ok notification
+
+        navigate('/');
+      },
+      onError: (err: any) => {
+        // show error notification
+        console.log('error', err);
+      },
+    }
+  );
+
+  if (isLoadingLoginUser) {
+    // create loading placeholder comp
+    return <div>loading</div>;
+  }
 
   return (
     <div className='auth-screen'>
@@ -26,13 +54,13 @@ const Login = () => {
         <TextLink to='/register' text='create a new account' />
       </p>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={() => login(user)}>
         <Input
           label='Email address'
           type='email'
           description='Email address'
-          value={email}
-          onChange={handleEmailChange}
+          value={user.email}
+          onChange={(event) => onChange(event)}
           required
         />
 
@@ -40,8 +68,8 @@ const Login = () => {
           label='Password'
           type='password'
           description='Password'
-          value={password}
-          onChange={handlePasswordChange}
+          value={user.password}
+          onChange={(event) => onChange(event)}
           required
         />
 
