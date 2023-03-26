@@ -17,10 +17,9 @@ const Header = () => {
         <nav className='nav'>
           <ul className='nav-links'>
             <NavLink to='/' text='Home' />
-            <NavLink to='/' text='About' />
-            <NavLink to='/' text='Services' />
-            <NavLink to='/' text='Blog' />
-            <NavLink to='/' text='Contact' />
+            <NavLink to='/' text='Public' />
+            <NavLink to='/' text='Protected' />
+            <NavLink to='/' text='Admin' />
           </ul>
         </nav>
       </div>
