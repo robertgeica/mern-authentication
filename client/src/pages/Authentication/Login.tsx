@@ -80,7 +80,7 @@ const Login = () => {
           required
         />
 
-        <div className='forgot-password'>
+        <div className='auth-link-container'>
           <TextLink to='/forgot-password' text='Forgot your password?' />
         </div>
 

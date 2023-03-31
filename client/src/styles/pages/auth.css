@@ -16,7 +16,7 @@
   color: var(--description-color);
 }
 
-.forgot-password {
+.auth-link-container {
   display: flex;
   justify-content: flex-end;
   width: 90%;

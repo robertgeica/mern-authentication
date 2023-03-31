@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Input, Loader, TextLink } from '../../components';
 import {
   ACCOUNT_CREATED_MESSAGE,
-  CONFIRM_EMAIL_MESSAGE,
+  SEND_CONFIRM_EMAIL_MESSAGE,
   GENERIC_ERROR_MESSAGE,
 } from '../../constants';
 import { useAuth } from '../../contexts/AuthContext';
@@ -45,9 +45,9 @@ const Register = () => {
     mutate: register,
   } = useMutation(registerUser, {
     onSuccess: (res: any) => {
-      navigate('/'); // this should become email confirmation route
+      navigate('/confirm-email');
       displayNotification('success', ACCOUNT_CREATED_MESSAGE);
-      displayNotification('info', CONFIRM_EMAIL_MESSAGE);
+      displayNotification('info', SEND_CONFIRM_EMAIL_MESSAGE);
     },
     onError: (err: any) => {
       displayNotification('error', GENERIC_ERROR_MESSAGE);
