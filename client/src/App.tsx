@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Header from './components/Header';
 import { queryClient } from './config/queryClient';
 import { AuthContext } from './contexts/AuthContext';
 import { Home, Login, Register, NotFound } from './pages';
 import { token } from './utils/singletons';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
   const [authToken, setAuthToken] = useState<string | null>(token || null);
@@ -31,6 +33,7 @@ const App: React.FC = () => {
             <Route path='*' element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        <ToastContainer />
       </QueryClientProvider>
     </AuthContext.Provider>
   );

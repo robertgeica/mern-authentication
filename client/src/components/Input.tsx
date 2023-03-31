@@ -1,10 +1,9 @@
 import { ChangeEventHandler } from 'react';
-import { Link } from 'react-router-dom';
 
 interface InputProps {
   label: string;
   type: 'button' | 'checkbox' | 'date' | 'email' | 'image' | 'number' | 'password' | 'text';
-  description: string;
+  id: string;
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   required?: boolean;
@@ -12,20 +11,20 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
   label,
   type,
-  description,
+  id,
   value,
   onChange,
   required,
 }) => {
   return (
     <div className='input-group'>
-      <label className='input-label' htmlFor={description}>
+      <label className='input-label' htmlFor={id}>
         {label}
       </label>
       <input
         className='input'
         type={type}
-        id={description}
+        id={id}
         value={value}
         onChange={onChange}
         required={required}

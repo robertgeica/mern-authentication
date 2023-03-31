@@ -13,8 +13,8 @@ interface LoginUser {
 }
 
 const Login = () => {
-  const { authToken, setAuthToken } = useAuth();
   const navigate = useNavigate();
+  const { authToken, setAuthToken } = useAuth();
   const [user, setUser] = useState({ email: '', password: '' });
 
   if (authToken) {
@@ -22,11 +22,14 @@ const Login = () => {
   }
 
   const onChange = (event: any) => {
-    setUser({ ...user, [event.target.type]: event.target.value });
+    setUser({ ...user, [event.target.id]: event.target.value });
   };
 
   function loginUser(values: LoginUser): Promise<any> {
-    return axios.post(`${env.VITE_SERVER_BASE_URL}/api/v1/users/login`, values);
+    return axios.post(
+      `${env.VITE_SERVER_BASE_URL}/${env.VITE_API_BASE_URL}/users/login`,
+      values
+    );
   }
 
   const { isLoading: isLoadingLoginUser, mutate: login } = useMutation(
@@ -34,14 +37,11 @@ const Login = () => {
     {
       onSuccess: (res: any) => {
         setAuthToken(res.data.authToken);
-
-        // show ok notification
-
         navigate('/');
+        console.log('Success notification placeholder. :)');
       },
       onError: (err: any) => {
-        // show error notification
-        console.log('error', err);
+        console.log('Error notification placeholder. :(', err);
       },
     }
   );
@@ -62,7 +62,7 @@ const Login = () => {
         <Input
           label='Email address'
           type='email'
-          description='Email address'
+          id='email'
           value={user.email}
           onChange={(event) => onChange(event)}
           required
@@ -71,7 +71,7 @@ const Login = () => {
         <Input
           label='Password'
           type='password'
-          description='Password'
+          id='password'
           value={user.password}
           onChange={(event) => onChange(event)}
           required
