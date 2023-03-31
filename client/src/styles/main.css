@@ -9,6 +9,7 @@
 @import url(./components/text-link.css);
 @import url(./components/input.css);
 @import url(./components/loader.css);
+@import url(./components/not-found.css);
 
 :root {
   --box-shadow-color-dark: #0000001a;

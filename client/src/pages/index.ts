@@ -5,4 +5,5 @@ export { default as ConfirmEmail } from './Authentication/ConfirmEmail';
 export { default as SendConfirmEmailToken } from './Authentication/SendConfirmEmailToken';
 export { default as ResetPassword } from './Authentication/ResetPassword';
 export { default as SendResetPasswordToken } from './Authentication/SendResetPasswordToken';
+export { default as User } from './User';
 export { default as NotFound } from './NotFound';

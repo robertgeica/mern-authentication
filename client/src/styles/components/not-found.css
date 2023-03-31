@@ -1,0 +1,10 @@
+.not-found {
+  margin-top: 5em;
+  color: var(--description-color);
+}
+
+.not-found-title {
+  font-size: 10em;
+  padding: 0;
+  margin: 0;
+}
