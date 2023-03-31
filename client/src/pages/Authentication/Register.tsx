@@ -73,8 +73,8 @@ const Register = () => {
           id='name'
           value={user.name}
           onChange={(event) => onChange(event)}
-          required
           disabled={isLoadingRegisterUser}
+          required
         />
 
         <Input
@@ -83,8 +83,8 @@ const Register = () => {
           id='email'
           value={user.email}
           onChange={(event) => onChange(event)}
-          required
           disabled={isLoadingRegisterUser}
+          required
         />
 
         <Input
@@ -93,8 +93,8 @@ const Register = () => {
           id='password'
           value={user.password}
           onChange={(event) => onChange(event)}
-          required
           disabled={isLoadingRegisterUser}
+          required
         />
 
         <Button type='submit'>Get started</Button>

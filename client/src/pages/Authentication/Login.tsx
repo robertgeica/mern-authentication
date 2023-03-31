@@ -66,8 +66,8 @@ const Login = () => {
           id='email'
           value={user.email}
           onChange={(event) => onChange(event)}
-          required
           disabled={isLoadingLoginUser}
+          required
         />
 
         <Input
@@ -76,8 +76,8 @@ const Login = () => {
           id='password'
           value={user.password}
           onChange={(event) => onChange(event)}
-          required
           disabled={isLoadingLoginUser}
+          required
         />
 
         <div className='forgot-password'>
