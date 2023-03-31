@@ -9,7 +9,7 @@ import { displayNotification } from '../../utils/displayNotification';
 
 const env = import.meta.env;
 
-const Login = () => {
+const ConfirmEmail = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { authToken, setAuthToken } = useAuth();
@@ -66,7 +66,7 @@ const Login = () => {
 
         <div className='auth-link-container'>
           <TextLink
-            to='/send-confirmation-email-token'
+            to='/send-confirm-email-token'
             text='Send token again'
           />
         </div>
@@ -77,4 +77,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ConfirmEmail;
