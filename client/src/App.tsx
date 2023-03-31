@@ -12,6 +12,8 @@ import {
   NotFound,
   ConfirmEmail,
   SendConfirmEmailToken,
+  SendResetPasswordToken,
+  ResetPassword,
 } from './pages';
 import { token } from './utils/singletons';
 import 'react-toastify/dist/ReactToastify.css';
@@ -39,8 +41,14 @@ const App: React.FC = () => {
             <Route path='/confirm-email' element={<ConfirmEmail />} />
             <Route path='/confirm-email/:id' element={<ConfirmEmail />} />
             <Route
-              path='/send-confirm-email-token'
+              path='/request-confirm-email'
               element={<SendConfirmEmailToken />}
+            />
+            <Route path='/reset-password' element={<ResetPassword />} />
+            <Route path='/reset-password/:id' element={<ResetPassword />} />
+            <Route
+              path='/forgot-password'
+              element={<SendResetPasswordToken />}
             />
 
             <Route path='*' element={<NotFound />} />
@@ -58,7 +66,9 @@ const HeaderWrapper = () => {
     '/login',
     '/register',
     '/confirm-email',
-    'send-confirm-email-token',
+    '/request-confirm-email',
+    '/forgot-password',
+    '/reset-password'
   ].some((path) => location.pathname.includes(path));
 
   return hideHeader ? null : <Header />;
