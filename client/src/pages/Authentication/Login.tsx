@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input, Loader, TextLink } from '../../components';
+import { GENERIC_ERROR_MESSAGE } from '../../constants';
 import { useAuth } from '../../contexts/AuthContext';
+import { displayNotification } from '../../utils/displayNotification';
 
 const env = import.meta.env;
 
@@ -38,10 +40,9 @@ const Login = () => {
       onSuccess: (res: any) => {
         setAuthToken(res.data.authToken);
         navigate('/');
-        console.log('Success notification placeholder. :)');
       },
       onError: (err: any) => {
-        console.log('Error notification placeholder. :(', err);
+        displayNotification('error', GENERIC_ERROR_MESSAGE);
       },
     }
   );
@@ -66,6 +67,7 @@ const Login = () => {
           value={user.email}
           onChange={(event) => onChange(event)}
           required
+          disabled={isLoadingLoginUser}
         />
 
         <Input
@@ -75,6 +77,7 @@ const Login = () => {
           value={user.password}
           onChange={(event) => onChange(event)}
           required
+          disabled={isLoadingLoginUser}
         />
 
         <div className='forgot-password'>

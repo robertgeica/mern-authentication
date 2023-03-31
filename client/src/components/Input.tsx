@@ -7,6 +7,7 @@ interface InputProps {
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   required?: boolean;
+  disabled?: boolean;
 }
 const Input: React.FC<InputProps> = ({
   label,
@@ -15,6 +16,7 @@ const Input: React.FC<InputProps> = ({
   value,
   onChange,
   required,
+  disabled
 }) => {
   return (
     <div className='input-group'>
@@ -28,6 +30,7 @@ const Input: React.FC<InputProps> = ({
         value={value}
         onChange={onChange}
         required={required}
+        disabled={disabled}
       />
     </div>
   );
