@@ -40,9 +40,9 @@ router
 
 router.route('/api/v1/users/login').post(loginUser);
 
-router.route('/api/v1/users/:id').get(protect, getUser);
-router.route('/api/v1/users');
 router.route('/api/v1/users/logged-user').get(protect, getLoggedUser);
+router.route('/api/v1/users/:id').get(protect, getUser);
+// router.route('/api/v1/users');
 
 router.route('/api/v1/users/confirm-email').post(requestEmailConfirmation);
 router.route('/api/v1/users/confirm-email/:token').put(confirmEmail);
