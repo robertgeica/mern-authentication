@@ -14,12 +14,18 @@ import {
   SendConfirmEmailToken,
   SendResetPasswordToken,
   ResetPassword,
+  User,
 } from './pages';
 import { token } from './utils/singletons';
 import 'react-toastify/dist/ReactToastify.css';
+import setAuthToken from './utils/setAuthToken';
+import { UserContext } from './contexts/UserContext';
+
+if (token) setAuthToken(token);
 
 const App: React.FC = () => {
   const [authToken, setAuthToken] = useState<string | null>(token || null);
+  const [user, setUser] = useState<null>(null);
 
   useEffect(() => {
     if (authToken) {
@@ -31,31 +37,34 @@ const App: React.FC = () => {
 
   return (
     <AuthContext.Provider value={{ authToken, setAuthToken }}>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <HeaderWrapper />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/confirm-email' element={<ConfirmEmail />} />
-            <Route path='/confirm-email/:id' element={<ConfirmEmail />} />
-            <Route
-              path='/request-confirm-email'
-              element={<SendConfirmEmailToken />}
-            />
-            <Route path='/reset-password' element={<ResetPassword />} />
-            <Route path='/reset-password/:id' element={<ResetPassword />} />
-            <Route
-              path='/forgot-password'
-              element={<SendResetPasswordToken />}
-            />
+      <UserContext.Provider value={{ user, setUser }}>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <HeaderWrapper />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
+              <Route path='/confirm-email' element={<ConfirmEmail />} />
+              <Route path='/confirm-email/:id' element={<ConfirmEmail />} />
+              <Route
+                path='/request-confirm-email'
+                element={<SendConfirmEmailToken />}
+              />
+              <Route path='/reset-password' element={<ResetPassword />} />
+              <Route path='/reset-password/:id' element={<ResetPassword />} />
+              <Route
+                path='/forgot-password'
+                element={<SendResetPasswordToken />}
+              />
+              <Route path='/user' element={<User />} />
 
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-        <ToastContainer />
-      </QueryClientProvider>
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+          <ToastContainer />
+        </QueryClientProvider>
+      </UserContext.Provider>
     </AuthContext.Provider>
   );
 };
@@ -68,7 +77,7 @@ const HeaderWrapper = () => {
     '/confirm-email',
     '/request-confirm-email',
     '/forgot-password',
-    '/reset-password'
+    '/reset-password',
   ].some((path) => location.pathname.includes(path));
 
   return hideHeader ? null : <Header />;

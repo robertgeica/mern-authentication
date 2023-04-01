@@ -1,9 +1,12 @@
+import { useAuth } from "../contexts/AuthContext";
+
 interface WaveWrapperProps {
   children: any;
 }
 const WaveWrapper: React.FC<WaveWrapperProps> = ({ children }) => {
+  const { authToken } = useAuth();
   return (
-    <div className='wave-wrapper'>
+    <div className={authToken ? 'wave' : 'wave-wrapper'}>
       {children}
     </div>
   );
