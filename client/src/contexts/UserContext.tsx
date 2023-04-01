@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import { token } from '../utils/singletons';
 
 type UserContextType = {
-  user: null;
+  user: any;
   setUser: (user: null) => void;
 };
 

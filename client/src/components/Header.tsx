@@ -53,7 +53,7 @@ const Header = () => {
             <NavLink to='/' text='Home' />
             <NavLink to='/' text='Public' />
             {user && <NavLink to='/User' text='Protected' />}
-            <NavLink to='/' text='Admin' />
+            {user?.role === 'admin' && <NavLink to='/' text='Admin' />}
           </ul>
         </nav>
       </div>
