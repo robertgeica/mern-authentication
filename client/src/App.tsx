@@ -18,10 +18,10 @@ import {
 } from './pages';
 import { token } from './utils/singletons';
 import 'react-toastify/dist/ReactToastify.css';
-import setAuthToken from './utils/setAuthToken';
+import setAuthTokenHeader from './utils/setAuthTokenHeader';
 import { UserContext } from './contexts/UserContext';
 
-if (token) setAuthToken(token);
+if (token) setAuthTokenHeader(token);
 
 const App: React.FC = () => {
   const [authToken, setAuthToken] = useState<string | null>(token || null);
@@ -57,7 +57,7 @@ const App: React.FC = () => {
                 path='/forgot-password'
                 element={<SendResetPasswordToken />}
               />
-              <Route path='/user' element={<User />} />
+              <Route path='/user' element={<User />}  />
 
               <Route path='*' element={<NotFound />} />
             </Routes>

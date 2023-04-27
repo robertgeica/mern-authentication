@@ -6,6 +6,7 @@ import { Button, Input, Loader, TextLink } from '../../components';
 import { GENERIC_ERROR_MESSAGE } from '../../constants';
 import { useAuth } from '../../contexts/AuthContext';
 import { displayNotification } from '../../utils/displayNotification';
+import setAuthTokenHeader from '../../utils/setAuthTokenHeader';
 
 const env = import.meta.env;
 
@@ -39,6 +40,7 @@ const Login = () => {
     {
       onSuccess: (res: any) => {
         setAuthToken(res.data.authToken);
+        setAuthTokenHeader(res.data.authToken);
         navigate('/');
       },
       onError: (err: any) => {

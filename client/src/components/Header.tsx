@@ -3,11 +3,14 @@ import { useQuery } from 'react-query';
 import { NavLink, Image, ButtonGroup, ButtonLink, Button, Loader } from '.';
 import { useAuth } from '../contexts/AuthContext';
 import { useUser } from '../contexts/UserContext';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 const env = import.meta.env;
 
 const Header = () => {
   const { authToken, setAuthToken } = useAuth();
   const { setUser } = useUser();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setAuthToken(null);
@@ -31,9 +34,11 @@ const Header = () => {
     { enabled: authToken !== null }
   );
 
-  if (isUserLoading) {
-    return <Loader />;
-  }
+  useEffect(() => {
+    if (!authToken) {
+      navigate('/');
+    }
+  }, [authToken]);
 
   return (
     <header className='header'>
@@ -52,7 +57,7 @@ const Header = () => {
           <ul className='nav-links'>
             <NavLink to='/' text='Home' />
             <NavLink to='/' text='Public' />
-            {user && <NavLink to='/User' text='Protected' />}
+            {user && <NavLink to='/user' text='Profile' />}
             {user?.role === 'admin' && <NavLink to='/' text='Admin' />}
           </ul>
         </nav>
