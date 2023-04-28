@@ -13,11 +13,15 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setAuthToken(null);
     setUser(null);
+    setAuthToken(null);
   };
 
-  const { data: user, isLoading: isUserLoading } = useQuery(
+  const {
+    data: user,
+    isLoading: isUserLoading,
+    error: onUserLoadError,
+  } = useQuery(
     [authToken],
     async () => {
       const res = await axios.get(
@@ -37,8 +41,13 @@ const Header = () => {
   useEffect(() => {
     if (!authToken) {
       navigate('/');
+      setAuthToken(null);
     }
   }, [authToken]);
+
+  if (onUserLoadError) {
+    localStorage.removeItem('auth-token');
+  }
 
   return (
     <header className='header'>

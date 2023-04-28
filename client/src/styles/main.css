@@ -27,6 +27,8 @@
   --text-link-color-hover: #0560d8;
   --border-color-light: #d1d5db;
   --description-color: #7a7a7a;
+  --disabled-color-light: #dad6d6b3;
+  --disabled-color-dark: #424242b3;
 }
 
 form {
@@ -44,4 +46,8 @@ form {
 
 .round {
   border-radius: 50%;
+}
+
+*:disabled {
+  background-color: var(--disabled-color-light);
 }

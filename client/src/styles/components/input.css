@@ -1,12 +1,23 @@
-.input-group {
+.input-group-column {
   display: flex;
   flex-direction: column;
   width: 90%;
   margin-bottom: 20px;
 }
 
+.input-group-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+  margin-bottom: 20px;
+}
+
 .input-label {
   margin-bottom: 5px;
+  /* margin-right: 10px; */
+  text-align: start;
   font-weight: 600;
   font-size: 14px;
   color: var(--grey-color);
@@ -21,6 +32,23 @@
   background-color: var(--white-color);
   border: 1px solid var(--border-color-light);
 }
+
+.input-auto {
+  width: 'auto';
+}
+
+.input-sm {
+  width: 180px;
+}
+
+.input-md {
+  width: 250px;
+}
+
+.input-lg {
+  width: 320px;
+}
+
 
 .input:hover {
   border: 1px solid var(--text-link-color);
