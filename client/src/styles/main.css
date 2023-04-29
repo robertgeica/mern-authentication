@@ -11,6 +11,7 @@
 @import url(./components/input.css);
 @import url(./components/loader.css);
 @import url(./components/not-found.css);
+@import url('./components/icon.css');
 
 :root {
   --box-shadow-color-dark: #0000001a;
@@ -29,6 +30,9 @@
   --description-color: #7a7a7a;
   --disabled-color-light: #dad6d6b3;
   --disabled-color-dark: #424242b3;
+  --success-color: #28a745;
+  --warning-color: #e9bd1d;
+  --error-color: #f44336;
 }
 
 form {
@@ -46,6 +50,20 @@ form {
 
 .round {
   border-radius: 50%;
+}
+
+.info { 
+  text-align: left;
+  padding: 0;
+  margin: 0 0 2em;
+  font-size: .9em;
+}
+
+.warning-info { 
+  color: var(--warning-color)
+}
+.error-info { 
+  color: var(--error-color)
 }
 
 *:disabled {
