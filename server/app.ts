@@ -10,6 +10,7 @@ import { rateLimiter } from './middleware/rateLimiter';
 import { hpp } from './middleware/hpp';
 
 import routes from './routes/index';
+import path from 'path';
 
 dotenv.config();
 
@@ -21,6 +22,9 @@ const app: Express = express();
 // mount middlewares
 app.use(cors());
 app.use(express.json());
+
+// serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // sanitize data
 app.use(mongoSanitize());
