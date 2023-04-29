@@ -1,0 +1,39 @@
+.image {
+}
+
+.upload {
+  cursor: pointer;
+}
+.overlay-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: 0.3s ease;
+  background-color: rgb(189, 188, 188, 0.8);
+}
+
+.overlay-container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  text-align: center;
+  height: 100%;
+  font-size: 3em;
+}
+
+.icon:hover {
+  color: black;
+}

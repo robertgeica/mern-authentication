@@ -114,6 +114,26 @@ const User = () => {
         },
       }
     );
+  const { isLoading: isLoadingImageUpload, mutate: uploadImage } = useMutation(
+    (files: any): any => {
+      const formData = new FormData();
+      formData.append('files', files[0]);
+      formData.append('usage', 'avatar');
+      axios.patch(
+        `${env.VITE_SERVER_BASE_URL}/${env.VITE_API_BASE_URL}/users/image-upload`,
+        formData
+      );
+    },
+    {
+      onSuccess: (res: any) => {
+        displayNotification('success', CONFIRM_UPDATE_ACCOUNT);
+        queryClient.invalidateQueries({ queryKey: ['logged-user'] });
+      },
+      onError: (err: any) => {
+        displayNotification('error', GENERIC_ERROR_MESSAGE);
+      },
+    }
+  );
 
   if (
     !user ||
@@ -121,7 +141,8 @@ const User = () => {
     isLoadingUpdateEmail ||
     isLoadingConfirmEmailToken ||
     isLoadingChangePassword ||
-    isLoadingConfirmPassword
+    isLoadingConfirmPassword ||
+    isLoadingImageUpload
   ) {
     return <Loader />;
   }
@@ -133,11 +154,13 @@ const User = () => {
         style={{ display: 'flex', margin: '2em 0' }}
       >
         <Image
-          src='https://picsum.photos/200'
+          src={`${env.VITE_SERVER_BASE_URL}/uploads/${user.avatar.url}`}
           alt='Logo'
           width={100}
           height={100}
           round
+          hasUpload
+          onUpload={uploadImage}
         />
         <div style={{ margin: '1.5em' }}>
           <h2 style={{ display: 'flex', marginBottom: '.5em' }}>

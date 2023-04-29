@@ -25,12 +25,7 @@ const Header = () => {
     ['logged-user', authToken],
     async () => {
       const res = await axios.get(
-        `${env.VITE_SERVER_BASE_URL}/${env.VITE_API_BASE_URL}/users/logged-user`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
+        `${env.VITE_SERVER_BASE_URL}/${env.VITE_API_BASE_URL}/users/logged-user`
       );
       setUser(res.data.user);
       return res.data.user;

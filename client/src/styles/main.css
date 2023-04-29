@@ -12,6 +12,7 @@
 @import url(./components/loader.css);
 @import url(./components/not-found.css);
 @import url('./components/icon.css');
+@import url('./components/image.css');
 
 :root {
   --box-shadow-color-dark: #0000001a;
