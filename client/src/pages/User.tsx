@@ -221,15 +221,19 @@ const User = () => {
             </div>
           </>
         )}
+
       {!user.resetPasswordToken ||
       new Date() > new Date(user.resetPasswordExpire) ? (
-        <p
-          className='info warning-info'
-          onClick={() => changePassword(user.email)}
-          style={{ cursor: 'pointer' }}
-        >
-          Request password reset token
-        </p>
+        <div className='input-group-row'>
+          <p>Password</p>
+          <p
+            className='info warning-info'
+            onClick={() => changePassword(user.email)}
+            style={{ cursor: 'pointer' }}
+          >
+            Click here to request password reset token
+          </p>
+        </div>
       ) : (
         <>
           <div className='user-section'>
@@ -272,6 +276,18 @@ const User = () => {
           size='lg'
           required
           disabled
+        />
+      </div>
+      <div className='user-section'>
+        <Input
+          label='Phone number'
+          type='tel'
+          id='number'
+          value={user.phoneNumber}
+          onChange={(event) => {}}
+          alignment='row'
+          size='lg'
+          required
         />
       </div>
       <div className='user-section' style={{ alignItems: 'flex-end' }}>

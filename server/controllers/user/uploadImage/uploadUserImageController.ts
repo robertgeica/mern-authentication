@@ -11,7 +11,7 @@ interface IRequest extends Request {
 }
 
 // @desc      Upload image for user
-// @route     PATCH /api/v1/users/upload-image
+// @route     PATCH /api/v1/users/image-upload
 // @access    Private
 export const uploadUserImage = asyncHandler(
   async (req: IRequest, res: Response, next: Function) => {

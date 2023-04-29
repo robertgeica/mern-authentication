@@ -55,8 +55,11 @@ form {
 .info { 
   text-align: left;
   padding: 0;
-  margin: 0 0 2em;
   font-size: .9em;
+}
+
+.info:hover {
+  text-decoration: underline;
 }
 
 .warning-info { 
