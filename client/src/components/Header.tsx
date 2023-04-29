@@ -22,7 +22,7 @@ const Header = () => {
     isLoading: isUserLoading,
     error: onUserLoadError,
   } = useQuery(
-    [authToken],
+    ['logged-user', authToken],
     async () => {
       const res = await axios.get(
         `${env.VITE_SERVER_BASE_URL}/${env.VITE_API_BASE_URL}/users/logged-user`,

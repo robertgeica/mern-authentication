@@ -1,0 +1,11 @@
+.icon {
+  cursor: pointer;
+  align-self: start;
+  font-size: 2em;
+  color: var(--success-color);
+  margin: 0 .4em;
+}
+
+.icon:hover {
+  color: var(--success-color);
+}
