@@ -6,6 +6,7 @@ import {
   Loader,
   Button,
   Icon,
+  PhoneInput,
 } from '../components';
 import { useUser } from '../contexts/UserContext';
 import axios from 'axios';
@@ -22,6 +23,11 @@ const User = () => {
   const [emailToken, setEmailToken] = useState<string | null>();
   const [password, setPassword] = useState<string | null>();
   const [passwordToken, setPasswordToken] = useState<string | null>();
+  const [phoneNumber, setPhoneNumber] = useState<{
+    countryCode: string;
+    phone: string;
+  }>();
+  const [phoneNumberToken, setPhoneNumberToken] = useState<string | null>();
 
   const { isLoading: isLoadingUpdateUser, mutate: updateUser } = useMutation(
     (values: any) =>
@@ -134,6 +140,42 @@ const User = () => {
       },
     }
   );
+  const { isLoading: isLoadingConfirmPhone, mutate: confirmPhone } =
+    useMutation(
+      (phoneNumber: string): any => {
+        axios.post(
+          `${env.VITE_SERVER_BASE_URL}/${env.VITE_API_BASE_URL}/users/confirm-phone`,
+          { phoneNumber }
+        );
+      },
+      {
+        onSuccess: (res: any) => {
+          displayNotification('success', CONFIRM_UPDATE_ACCOUNT);
+          queryClient.invalidateQueries({ queryKey: ['logged-user'] });
+        },
+        onError: (err: any) => {
+          displayNotification('error', GENERIC_ERROR_MESSAGE);
+        },
+      }
+    );
+
+  const { isLoading: isLoadingConfirmPhoneToken, mutate: confirmPhoneToken } =
+    useMutation(
+      (token: string): any => {
+        axios.put(
+          `${env.VITE_SERVER_BASE_URL}/${env.VITE_API_BASE_URL}/users/confirm-phone/${token}`
+        );
+      },
+      {
+        onSuccess: (res: any) => {
+          displayNotification('success', CONFIRM_UPDATE_ACCOUNT);
+          queryClient.invalidateQueries({ queryKey: ['logged-user'] });
+        },
+        onError: (err: any) => {
+          displayNotification('error', GENERIC_ERROR_MESSAGE);
+        },
+      }
+    );
 
   if (
     !user ||
@@ -142,7 +184,9 @@ const User = () => {
     isLoadingConfirmEmailToken ||
     isLoadingChangePassword ||
     isLoadingConfirmPassword ||
-    isLoadingImageUpload
+    isLoadingImageUpload ||
+    isLoadingConfirmPhone ||
+    isLoadingConfirmPhoneToken
   ) {
     return <Loader />;
   }
@@ -301,18 +345,52 @@ const User = () => {
           disabled
         />
       </div>
-      <div className='user-section'>
-        <Input
-          label='Phone number'
-          type='tel'
-          id='number'
-          value={user.phoneNumber}
-          onChange={(event) => {}}
-          alignment='row'
-          size='lg'
-          required
-        />
-      </div>
+
+      {new Date() > new Date(user.phoneNumberConfirmationExpire) && (
+        <p className='info error-info'>
+          Your token has expired. Please add your phone number again!
+        </p>
+      )}
+      {!user.phoneNumberConfirmationToken ||
+      new Date() > new Date(user.phoneNumberConfirmationExpire) ? (
+        <div className='user-section'>
+          <PhoneInput
+            phoneNumber={
+              phoneNumber || { phone: user.phoneNumber, countryCode: '' }
+            }
+            onChange={setPhoneNumber}
+          />
+
+          {phoneNumber?.countryCode && phoneNumber.phone && (
+            <Icon
+              onClick={() =>
+                confirmPhone(`${phoneNumber.countryCode}${phoneNumber.phone}`)
+              }
+            >
+              &#x2714;
+            </Icon>
+          )}
+        </div>
+      ) : (
+        <div className='user-section'>
+          <Input
+            label='Phone token'
+            type='text'
+            id='phone-token'
+            value={phoneNumberToken || ''}
+            onChange={(event) => setPhoneNumberToken(event.target.value)}
+            alignment='row'
+            size='lg'
+            required
+          />
+          {phoneNumberToken && (
+            <Icon onClick={() => confirmPhoneToken(phoneNumberToken)}>
+              &#x2714;
+            </Icon>
+          )}
+        </div>
+      )}
+
       <div className='user-section' style={{ alignItems: 'flex-end' }}>
         <Button type='button' onClick={() => {}}>
           Delete account
