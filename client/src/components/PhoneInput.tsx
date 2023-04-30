@@ -282,7 +282,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({ phoneNumber, onChange }) => {
       setSelectedCountry(selected);
     }
   };
-console.log('phoneNumber',phoneNumber);
+
   return (
     <Input
       label='Phone number'

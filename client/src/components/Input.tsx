@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, Fragment } from 'react';
 
 interface InputProps {
   label?: string;
@@ -33,23 +33,33 @@ const Input: React.FC<InputProps> = ({
   disabled,
   children,
 }) => {
+  const input = (
+    <input
+      className={`input input-${size}`}
+      type={type}
+      id={id}
+      value={value}
+      onChange={onChange}
+      required={required}
+      disabled={disabled}
+    />
+  );
+
   return (
     <div className={`input-group-${alignment}`}>
       <label className='input-label' htmlFor={id}>
         {label}
       </label>
-      <div>
-        {children && children}
-        <input
-          className={`input input-${size}`}
-          type={type}
-          id={id}
-          value={value}
-          onChange={onChange}
-          required={required}
-          disabled={disabled}
-        />
-      </div>
+      {children ? (
+        <div
+          style={alignment === 'row' ? { display: 'flex' } : { width: '100%' }}
+        >
+          {children && children}
+          {input}
+        </div>
+      ) : (
+        <>{input}</>
+      )}
     </div>
   );
 };
