@@ -13,6 +13,7 @@ import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { displayNotification } from '../utils/displayNotification';
 import { CONFIRM_UPDATE_ACCOUNT, GENERIC_ERROR_MESSAGE } from '../constants';
+import { useAuth } from '../contexts/AuthContext';
 const env = import.meta.env;
 
 const User = () => {
@@ -28,6 +29,7 @@ const User = () => {
     phone: string;
   }>();
   const [phoneNumberToken, setPhoneNumberToken] = useState<string | null>();
+  const { setAuthToken } = useAuth();
 
   const { isLoading: isLoadingUpdateUser, mutate: updateUser } = useMutation(
     (values: any) =>
@@ -177,6 +179,24 @@ const User = () => {
       }
     );
 
+    const { isLoading: isLoadingDeleteUser, mutate: deleteUser } = useMutation(
+      () =>
+        axios.delete(
+          `${env.VITE_SERVER_BASE_URL}/${env.VITE_API_BASE_URL}/users/${user._id}`
+        ),
+      {
+        onSuccess: (res: any) => {
+          displayNotification('success', CONFIRM_UPDATE_ACCOUNT);
+          setAuthToken(null);
+          // queryClient.invalidateQueries({ queryKey: ['logged-user'] });
+        },
+        onError: (err: any) => {
+          displayNotification('error', GENERIC_ERROR_MESSAGE);
+        },
+      }
+    );
+  
+
   if (
     !user ||
     isLoadingUpdateUser ||
@@ -186,7 +206,8 @@ const User = () => {
     isLoadingConfirmPassword ||
     isLoadingImageUpload ||
     isLoadingConfirmPhone ||
-    isLoadingConfirmPhoneToken
+    isLoadingConfirmPhoneToken ||
+    isLoadingDeleteUser
   ) {
     return <Loader />;
   }
@@ -392,7 +413,7 @@ const User = () => {
       )}
 
       <div className='user-section' style={{ alignItems: 'flex-end' }}>
-        <Button type='button' onClick={() => {}}>
+        <Button type='button' onClick={() => deleteUser()}>
           Delete account
         </Button>
       </div>
