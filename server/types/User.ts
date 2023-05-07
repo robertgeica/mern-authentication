@@ -1,5 +1,16 @@
 import { Document, Types } from 'mongoose';
 
+interface PhoneNumber {
+  countryCode: string;
+  phone: string;
+}
+
+interface Avatar {
+  url: string;
+  mimeType: string;
+  size: number;
+} 
+
 export interface IUser extends Document {
   // Required properties
   _id: Types.ObjectId;
@@ -10,14 +21,10 @@ export interface IUser extends Document {
   role: 'admin' | 'user';
 
   // Optional properties
-  phoneNumber?: string;
+  phoneNumber?: PhoneNumber;
 
   // Avatar properties
-  avatar?: {
-    url: string;
-    mimeType: string;
-    size: number;
-  };
+  avatar?: Avatar;
 
   // Two-factor authentication properties
   twoFactorAuthEnabled: boolean;

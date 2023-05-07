@@ -37,10 +37,14 @@ const userSchema: Schema = new Schema<IUser>(
       required: true,
       default: 'user',
     },
+
     phoneNumber: {
-      type: String,
-      unique: true,
-      validate: [isValidPhoneNumber, 'Your phone number must be valid.'],
+      countryCode: { type: String, sparse: true },
+      number: {
+        type: String,
+        validate: [isValidPhoneNumber, 'Your phone number must be valid.'],
+        sparse: true,
+      },
     },
     avatar: {
       url: { type: String },
